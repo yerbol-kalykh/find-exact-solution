@@ -1,0 +1,29 @@
+﻿@page "/leaderboard"
+
+<h1 class="page-title"> Leaderboard </h1>
+
+@if (Teams == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Team ID</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var team in Teams)
+            {
+                <tr>
+                    <td>@team.Id</td>
+                    <td>@team.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
