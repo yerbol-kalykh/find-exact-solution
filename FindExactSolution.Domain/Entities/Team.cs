@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FindExactSolution.Domain.Data.Entities
+namespace FindExactSolution.Domain.Entities
 {
     public class Team
     {

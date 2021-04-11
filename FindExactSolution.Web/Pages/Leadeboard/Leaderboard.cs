@@ -1,4 +1,4 @@
-﻿using FindExactSolution.Domain.Data.Entities;
+﻿using FindExactSolution.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
