@@ -8,6 +8,8 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Event> builder)
         {
+            builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
+
             builder.Property(t => t.Title)
                    .IsRequired()
                    .HasMaxLength(256);
