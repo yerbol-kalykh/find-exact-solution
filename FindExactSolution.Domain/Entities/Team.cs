@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FindExactSolution.Domain.Common;
+using System;
+using System.Collections.Generic;
 
 namespace FindExactSolution.Domain.Entities
 {
@@ -7,5 +9,7 @@ namespace FindExactSolution.Domain.Entities
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public IList<IUser> Users { get; set; } = new List<IUser>();
     }
 }
