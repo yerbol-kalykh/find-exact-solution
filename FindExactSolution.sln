@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Applicati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Domain", "FindExactSolution.Domain\FindExactSolution.Domain.csproj", "{B236E413-BD16-4C7A-91A4-18457A2C5ACA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindExactSolution.Web.Server", "FindExactSolution.Web\Server\FindExactSolution.Web.Server.csproj", "{AC0FA25E-8372-42BE-9763-C94AA4AF6B71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Web.Server", "FindExactSolution.Web\Server\FindExactSolution.Web.Server.csproj", "{AC0FA25E-8372-42BE-9763-C94AA4AF6B71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindExactSolution.Web.Client", "FindExactSolution.Web\Client\FindExactSolution.Web.Client.csproj", "{EF3086B4-D359-4B32-BEA1-3E624F551F6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Web.Client", "FindExactSolution.Web\Client\FindExactSolution.Web.Client.csproj", "{EF3086B4-D359-4B32-BEA1-3E624F551F6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

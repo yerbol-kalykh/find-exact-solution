@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Server.Controllers
 {
+    [Route("api/events")]
     public class EventsController : ApiControllerBase
     {
         [HttpGet]

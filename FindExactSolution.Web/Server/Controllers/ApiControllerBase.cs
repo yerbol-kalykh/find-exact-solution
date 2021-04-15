@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 namespace FindExactSolution.Web.Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     public abstract class ApiControllerBase : ControllerBase
     {
         private ISender _mediator;
