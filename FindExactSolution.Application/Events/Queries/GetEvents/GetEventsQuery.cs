@@ -1,15 +1,19 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FindExactSolution.Application.Common.Interfaces;
+using FindExactSolution.Application.Common.Security;
 using FindExactSolution.Application.Events.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.Events.Queries.GetEvents
 {
+    [Authorize]
     public class GetEventsQuery : IRequest<IEnumerable<EventDto>>
     {
 
@@ -19,16 +23,19 @@ namespace FindExactSolution.Application.Events.Queries.GetEvents
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _userService;
 
-        public GetEventsQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetEventsQueryHandler(IApplicationDbContext context, IMapper mapper, ICurrentUserService userService)
         {
             _context = context;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public async Task<IEnumerable<EventDto>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
         {
             return  await _context.Events
+                                  .Where(e => e.Teams.Any(t=>t.Users.Any(u => u.Id == _userService.UserId)))
                                   .AsNoTracking()
                                   .ProjectTo<EventDto>(_mapper.ConfigurationProvider)
                                   .ToListAsync(cancellationToken);

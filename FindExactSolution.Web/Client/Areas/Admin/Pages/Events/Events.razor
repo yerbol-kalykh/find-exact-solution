@@ -1,0 +1,34 @@
+﻿@page "/admin/events"
+
+<h3>Events</h3>
+
+@if (_events == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var singleEvent in _events)
+            {
+                <tr>
+                    <td>@singleEvent.Id</td>
+                    <td>@singleEvent.Title</td>
+                    <td>@singleEvent.StartDate.ToShortDateString()</td>
+                    <td>
+                        <a href="/admin/events/@singleEvent.Id">View</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -12,5 +12,7 @@ namespace FindExactSolution.Domain.Entities
         public DateTime StartDate { get; set; }
 
         public IList<Question> Questions { get; set; } = new List<Question>();
+
+        public IList<Team> Teams { get; set; } = new List<Team>();
     }
 }

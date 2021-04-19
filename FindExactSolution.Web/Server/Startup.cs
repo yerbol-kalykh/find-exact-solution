@@ -1,6 +1,9 @@
 using FindExactSolution.Application;
+using FindExactSolution.Application.Common.Interfaces;
 using FindExactSolution.Infrastructure;
-using Microsoft.AspNetCore.Authentication;
+using FindExactSolution.Web.Server.Filters;
+using FindExactSolution.Web.Server.Services;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +29,10 @@ namespace FindExactSolution.Web.Server
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddAuthentication()
-                    .AddIdentityServerJwt();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => options.Filters.Add<ApiExceptionFilterAttribute>())
+                    .AddFluentValidation();
 
             services.AddRazorPages();
         }

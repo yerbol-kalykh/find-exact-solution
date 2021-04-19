@@ -1,0 +1,12 @@
+﻿@page "/admin/events/{id:guid}"
+
+@if (_eventDetail == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>Event @_eventDetail.Title</h3>
+
+    <h4>Id : @_eventDetail.Id</h4>
+}
