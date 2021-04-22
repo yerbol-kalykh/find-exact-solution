@@ -8,5 +8,7 @@ namespace FindExactSolution.Infrastructure.Identity
     public class ApplicationUser : IdentityUser, IUser
     {
         public IList<Team> Teams { get; set; } = new List<Team>();
+
+        public IList<Registration> Registrations { get; set; } = new List<Registration>();
     }
 }

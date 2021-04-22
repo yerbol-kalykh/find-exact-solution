@@ -1,0 +1,31 @@
+﻿@page "/events/{id:guid}"
+
+@if (_event == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>@_event.Title <span class="badge badge-info">@_event.Date.ToString("dd MMMM yyyy")</span></h3> 
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <br/>
+
+    @if (!_event.IsCurrentUserRegistered)
+    {
+        <div class="alert alert-success" role="alert">
+            Registration for this event is available
+        </div>
+
+        <button type="button" class="btn btn-info">Register</button>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert">
+            You have successfully registered for an event
+        </div>
+    }
+}

@@ -14,6 +14,7 @@ namespace FindExactSolution.Infrastructure.Persistence
         public DbSet<Team> Teams { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Registration> Registrations { get; set; }
 
         public ApplicationDbContext(
            DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

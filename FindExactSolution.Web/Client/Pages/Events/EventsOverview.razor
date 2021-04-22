@@ -15,16 +15,20 @@ else
                 <th>Id</th>
                 <th>Title</th>
                 <th>Date</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var singleEvent in _events)
             {
-                <tr>
-                    <td>@singleEvent.Id</td>
-                    <td>@singleEvent.Title</td>
-                    <td>@singleEvent.StartDate.ToShortDateString()</td>
-                </tr>
+            <tr>
+                <td>@singleEvent.Id</td>
+                <td>@singleEvent.Title</td>
+                <td>@singleEvent.StartDate.ToShortDateString()</td>
+                <td>
+                    <a href="/events/@singleEvent.Id">View</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

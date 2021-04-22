@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Web.Serve
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Web.Client", "FindExactSolution.Web\Client\FindExactSolution.Web.Client.csproj", "{EF3086B4-D359-4B32-BEA1-3E624F551F6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindExactSolution.Common", "FindExactSolution.Common\FindExactSolution.Common.csproj", "{6CD6B827-E4D0-4BF5-85D7-38C029157315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FindExactSolution.Common", "FindExactSolution.Common\FindExactSolution.Common.csproj", "{6CD6B827-E4D0-4BF5-85D7-38C029157315}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

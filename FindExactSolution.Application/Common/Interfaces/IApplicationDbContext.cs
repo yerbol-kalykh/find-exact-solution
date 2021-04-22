@@ -1,5 +1,4 @@
-﻿using FindExactSolution.Domain.Common;
-using FindExactSolution.Domain.Entities;
+﻿using FindExactSolution.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +12,8 @@ namespace FindExactSolution.Application.Common.Interfaces
         DbSet<Event> Events { get; set; }
 
         DbSet<Question> Questions { get; set; }
+
+        DbSet<Registration> Registrations { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

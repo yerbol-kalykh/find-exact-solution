@@ -5,7 +5,6 @@ using FindExactSolution.Application.Common.Security;
 using FindExactSolution.Application.Events.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -23,19 +22,17 @@ namespace FindExactSolution.Application.Events.Queries.GetEvents
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
-        private readonly ICurrentUserService _userService;
 
-        public GetEventsQueryHandler(IApplicationDbContext context, IMapper mapper, ICurrentUserService userService)
+        public GetEventsQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _userService = userService;
         }
 
         public async Task<IEnumerable<EventDto>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
         {
             return  await _context.Events
-                                  .Where(e => e.Teams.Any(t=>t.Users.Any(u => u.Id == _userService.UserId)))
+                                  .Where(e => e.IsActive)
                                   .AsNoTracking()
                                   .ProjectTo<EventDto>(_mapper.ConfigurationProvider)
                                   .ToListAsync(cancellationToken);

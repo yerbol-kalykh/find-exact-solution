@@ -1,5 +1,6 @@
 ﻿using FindExactSolution.Web.Client.Common.Interfaces;
 using FindExactSolution.Web.Client.Common.Resources.Events;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -20,6 +21,11 @@ namespace FindExactSolution.Web.Client.Services
         public async Task<IEnumerable<EventResource>> GetAllEventsAsync()
         {
             return await _httpClient.GetFromJsonAsync<EventResource[]>($"{BaseEventApiUrl}");
+        }
+
+        public async Task<EventDetailsResource> GetEventByIdAsync(Guid id)
+        {
+            return await _httpClient.GetFromJsonAsync<EventDetailsResource>($"{BaseEventApiUrl}/{id}");
         }
     }
 }
