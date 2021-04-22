@@ -1,10 +1,14 @@
 ﻿using FindExactSolution.Application.Common.Models;
+using FindExactSolution.Domain.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.Common.Interfaces
 {
     public interface IIdentityService
     {
+        Task<IEnumerable<IUser>> GetAllUsersAsync();
+
         Task<string> GetUserNameAsync(string userId);
 
         Task<bool> IsInRoleAsync(string userId, string role);

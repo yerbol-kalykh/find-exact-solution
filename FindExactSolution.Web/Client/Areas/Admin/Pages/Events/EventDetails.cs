@@ -1,5 +1,6 @@
 ﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Events;
+using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Teams;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using System;
@@ -15,6 +16,9 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         [Inject]
         public IAdminEventDataService AdminEventDataService { get; set; }
 
+        [Inject]
+        public IAdminTeamDataService AdminTeamDataService { get; set; }
+
         private AdminEventDetailResource _eventDetail;
 
         protected override async Task OnInitializedAsync()
@@ -27,6 +31,13 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
             {
                 exception.Redirect();
             }
+        }
+
+        public void GenerateTeam()
+        {
+            var generateTeamResource = new GenerateTeamResource() { EventId = _eventDetail.Id };
+
+            AdminTeamDataService.GenerateTeamsAsync(generateTeamResource);
         }
     }
 }

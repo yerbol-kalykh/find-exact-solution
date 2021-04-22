@@ -10,8 +10,10 @@ namespace FindExactSolution.Domain.Entities
 
         public string Name { get; set; }
 
+        public Guid EventId { get; set; }
+
         public IList<IUser> Users { get; set; } = new List<IUser>();
 
-        public IList<Event> Events { get; set; } = new List<Event>();
+        public Event Event { get; set; }
     }
 }

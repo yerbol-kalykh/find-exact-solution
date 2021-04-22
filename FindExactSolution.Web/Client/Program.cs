@@ -28,6 +28,10 @@ namespace FindExactSolution.Web.Client
             builder.Services.AddHttpClient<IAdminEventDataService, AdminEventDataService>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+            builder.Services.AddHttpClient<IAdminTeamDataService, AdminTeamDataService>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("FindExactSolution.Web.ServerAPI"));
 
             builder.Services.AddApiAuthorization();

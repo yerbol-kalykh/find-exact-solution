@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FindExactSolution.Common\FindExactSolution.Common.csproj" />
     <ProjectReference Include="..\FindExactSolution.Domain\FindExactSolution.Domain.csproj" />
   </ItemGroup>
 

@@ -1,8 +1,10 @@
 ﻿using FindExactSolution.Application.Common.Interfaces;
 using FindExactSolution.Application.Common.Models;
+using FindExactSolution.Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,6 +31,11 @@ namespace FindExactSolution.Infrastructure.Identity
             var user = await _userManager.Users.FirstAsync(u => u.Id == userId);
 
             return user.UserName;
+        }
+
+        public async Task<IEnumerable<IUser>> GetAllUsersAsync()
+        {
+            return await _userManager.Users.ToListAsync();
         }
 
         public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
