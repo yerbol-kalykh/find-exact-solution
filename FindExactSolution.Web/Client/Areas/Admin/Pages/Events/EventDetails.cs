@@ -33,11 +33,11 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
             }
         }
 
-        public void GenerateTeam()
+        public async Task GenerateTeamAsync()
         {
             var generateTeamResource = new GenerateTeamResource() { EventId = _eventDetail.Id };
 
-            AdminTeamDataService.GenerateTeamsAsync(generateTeamResource);
+            await AdminTeamDataService.GenerateTeamsAsync(generateTeamResource);
         }
     }
 }

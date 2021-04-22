@@ -23,7 +23,7 @@ else
                 <tr>
                     <td>@singleEvent.Id</td>
                     <td>@singleEvent.Title</td>
-                    <td>@singleEvent.StartDate.ToShortDateString()</td>
+                    <td>@singleEvent.Date.ConvertToDefaultDateFormat()</td>
                     <td>
                         <a href="/admin/events/@singleEvent.Id">View</a>
                     </td>

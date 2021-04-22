@@ -8,6 +8,6 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Events
 
         public string Title { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 }
 else
 {
-    <h3>@_event.Title <span class="badge badge-info">@_event.Date.ToString("dd MMMM yyyy")</span></h3> 
+    <h3>@_event.Title <span class="badge badge-info">@_event.Date.ConvertToDefaultDateFormat()</span></h3> 
 
     <div class="progress">
         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
@@ -20,7 +20,7 @@ else
             Registration for this event is available
         </div>
 
-        <button type="button" class="btn btn-info">Register</button>
+        <button type="button" class="btn btn-info" @onclick="RegisterAsync">Register</button>
     }
     else
     {

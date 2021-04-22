@@ -16,4 +16,8 @@
     <ProjectReference Include="..\FindExactSolution.Domain\FindExactSolution.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Registrations\Models\" />
+  </ItemGroup>
+
 </Project>

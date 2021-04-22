@@ -18,11 +18,11 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
             _httpClient = httpClient;
         }
 
-        public async Task GenerateTeamsAsync(GenerateTeamResource teamResource)
+        public async Task GenerateTeamsAsync(GenerateTeamResource resource)
         {
-            var teamResourceJson = new StringContent(JsonSerializer.Serialize(teamResource), Encoding.UTF8, "application/json");
-            
-            await _httpClient.PostAsync($"{BaseEventApiUrl}/{teamResource.EventId}", teamResourceJson);
+            var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
+
+            await _httpClient.PostAsync($"{BaseEventApiUrl}/{resource.EventId}", resourceJson);
         }
     }
 }
