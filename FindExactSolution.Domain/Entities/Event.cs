@@ -9,11 +9,13 @@ namespace FindExactSolution.Domain.Entities
 
         public string Title { get; set; }
 
+        public DateTime StartDateTime { get; set; }
+
+        public DateTime EndDateTime { get; set; }
+
+        public DateTime? DeletedDate { get; set; }
+
         public bool IsActive { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public DateTime? DeleteDate { get; set; }
 
         public IList<Question> Questions { get; set; } = new List<Question>();
 

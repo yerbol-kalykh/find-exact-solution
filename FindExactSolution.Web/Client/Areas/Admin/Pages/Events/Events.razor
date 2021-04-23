@@ -13,21 +13,23 @@ else
             <tr>
                 <th>Id</th>
                 <th>Title</th>
-                <th>Date</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var singleEvent in _events)
             {
-                <tr>
-                    <td>@singleEvent.Id</td>
-                    <td>@singleEvent.Title</td>
-                    <td>@singleEvent.Date.ConvertToDefaultDateFormat()</td>
-                    <td>
-                        <a href="/admin/events/@singleEvent.Id">View</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>@singleEvent.Id</td>
+                <td>@singleEvent.Title</td>
+                <td>@singleEvent.StartDateTime.ConvertToDefaultDateFormat()</td>
+                <td>@singleEvent.EndDateTime.ConvertToDefaultDateFormat()</td>
+                <td>
+                    <a href="/admin/events/@singleEvent.Id">View</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

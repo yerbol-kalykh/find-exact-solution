@@ -1,7 +1,9 @@
 ﻿using FindExactSolution.Application.Common.Interfaces;
 using FindExactSolution.Common.Extensions;
 using FindExactSolution.Domain.Entities;
+using FindExactSolution.Domain.Enums;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading;
@@ -29,11 +31,14 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
 
         public async Task<Unit> Handle(GenerateTeamsCommand request, CancellationToken cancellationToken)
         {
-            var users = (await _identityService.GetAllUsersAsync()).ToList();
+            await DeletePreviousCreatedTeamsAsync(request.EventId);
 
-            users.Shuffle();
+            var registrations = await _context.Registrations.Include(r=>r.User).Where(r => r.EventId == request.EventId 
+                                        && r.Status == RegistrationStatus.Registered).Select(r=>r.User).ToListAsync();
 
-            var groups = users.SplitList(request.TeamSize);
+            registrations.Shuffle();
+
+            var groups = registrations.SplitList(request.TeamSize);
 
             var counter = 1;
 
@@ -47,6 +52,14 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
+        }
+
+        public async Task DeletePreviousCreatedTeamsAsync(Guid eventId)
+        {
+            var teams = await _context.Teams.Where(t => t.EventId == eventId).ToListAsync();
+
+            _context.Teams.RemoveRange(teams);
+           
         }
     }
 }

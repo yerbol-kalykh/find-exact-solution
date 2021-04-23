@@ -1,6 +1,6 @@
 ﻿using FindExactSolution.Application.Events.Models;
-using FindExactSolution.Application.Events.Queries.GetEventById;
 using FindExactSolution.Application.Events.Queries.GetEvents;
+using FindExactSolution.Application.Events.Queries.GetUserEventById;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace FindExactSolution.Web.Server.Controllers
         {
             if (id == Guid.Empty) return BadRequest();
 
-            return Ok(await Mediator.Send(new GetEventByIdQuery() { Id = id}));
+            return Ok(await Mediator.Send(new GetUserEventByIdQuery() { Id = id}));
         }
     }
 }

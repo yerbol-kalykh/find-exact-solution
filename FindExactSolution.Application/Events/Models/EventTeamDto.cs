@@ -2,11 +2,12 @@
 using FindExactSolution.Domain.Entities;
 using System;
 
-namespace FindExactSolution.Application.Area.Admin.Events.Models
+namespace FindExactSolution.Application.Events.Models
 {
-    public class TeamDto : IMapFrom<Team>
+    public class EventTeamDto : IMapFrom<Team>
     {
         public Guid Id { get; set; }
+
         public string Name { get; set; }
     }
 }

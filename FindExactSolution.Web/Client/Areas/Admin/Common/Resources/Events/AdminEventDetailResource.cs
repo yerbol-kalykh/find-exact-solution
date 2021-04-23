@@ -10,6 +10,10 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Events
 
         public string Title { get; set; }
 
+        public DateTime StartDateTime { get; set; }
+
+        public DateTime EndDateTime { get; set; }
+
         public IEnumerable<AdminTeamResource> Teams { get; set; }
 
         public AdminEventDetailResource()

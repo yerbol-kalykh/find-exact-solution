@@ -6,7 +6,7 @@ namespace FindExactSolution.Common.Extensions
     {
         public static string ConvertToDefaultDateFormat(this DateTime date)
         {
-            return date.ToString("dd MMMM yyyy");
+            return date.ToString("dd MMMM yyyy H:mm");
         }
     }
 }
