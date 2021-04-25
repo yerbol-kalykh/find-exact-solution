@@ -1,6 +1,7 @@
 ﻿using FindExactSolution.Application.Common.Mappings;
 using FindExactSolution.Domain.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace FindExactSolution.Application.Events.Models
 {
@@ -9,5 +10,7 @@ namespace FindExactSolution.Application.Events.Models
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public IList<EventUserDto> Users { get; set; } = new List<EventUserDto>();
     }
 }

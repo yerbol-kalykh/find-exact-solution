@@ -6,13 +6,13 @@
 }
 else
 {
-    <h3>@_event.Title <span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h3> 
+    <h3>@_event.Title <span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h3>
 
     <div class="progress">
         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
-    <br/>
+    <br />
 
     @if (!_event.IsCurrentUserRegistered)
     {
@@ -27,5 +27,36 @@ else
         <div class="alert alert-success" role="alert">
             You have successfully registered for an event
         </div>
+
+        @if (_event.Team != null)
+        {
+            <h4>@_event.Team.Name</h4>
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var member in _event.Team.Users)
+                    {
+                        <tr>
+                            <td>@member.Id</td>
+                            @*<td>@singleEvent.Title</td>
+                            <td>@singleEvent.StartDateTime.ConvertToDefaultDateFormat()</td>
+                            <td>@singleEvent.EndDateTime.ConvertToDefaultDateFormat()</td>
+                            <td>
+                                <a href="/events/@singleEvent.Id">View</a>
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     }
 }
