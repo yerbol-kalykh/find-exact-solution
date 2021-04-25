@@ -32,28 +32,28 @@ else
         {
             <h4>@_event.Team.Name</h4>
 
-
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Email</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @code{int row = 0;}
+
                     @foreach (var member in _event.Team.Users)
                     {
-                        <tr>
-                            <td>@member.Id</td>
-                            @*<td>@singleEvent.Title</td>
-                            <td>@singleEvent.StartDateTime.ConvertToDefaultDateFormat()</td>
-                            <td>@singleEvent.EndDateTime.ConvertToDefaultDateFormat()</td>
-                            <td>
-                                <a href="/events/@singleEvent.Id">View</a>
-                            </td>*@
-                        </tr>
+                    <tr>
+                        <td>@(++row)</td>
+                        <td>@member.UserName</td>
+                        <td>@member.FirstName</td>
+                        <td>@member.LastName</td>
+                        <td>@member.Email</td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -7,5 +7,13 @@ namespace FindExactSolution.Application.Events.Models
     public class EventUserDto : IMapFrom<IUser>
     {
         public Guid Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Email { get; set; }
     }
 }
