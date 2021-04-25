@@ -45,7 +45,7 @@ namespace FindExactSolution.Application.Events.Queries.GetUserEventById
             var team = await _context.Teams.Include(t => t.Users)
                              .FirstOrDefaultAsync(t => t.Users.Any(u => u.Id == _userService.UserId), cancellationToken: cancellationToken);
 
-            _mapper.Map(team, response.Team);
+            response.Team = _mapper.Map<EventTeamDto>(team);
 
             return response;
         }
