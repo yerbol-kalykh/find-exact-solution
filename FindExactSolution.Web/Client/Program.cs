@@ -19,9 +19,6 @@ namespace FindExactSolution.Web.Client
 
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddHttpClient("FindExactSolution.Web.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
-                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
             builder.Services.AddHttpClient<IEventDataService, EventDataService>(client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                             .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
