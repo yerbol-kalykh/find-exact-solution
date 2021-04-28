@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace FindExactSolution.Domain.Entities
 {
@@ -9,10 +8,12 @@ namespace FindExactSolution.Domain.Entities
 
         public string Title { get; set; }
 
-        public string Description { get; set; }
+        public string Body { get; set; }
 
         public int Point { get; set; }
 
-        public IList<Event> Events { get; set; } = new List<Event>();
+        public Guid EventId { get; set; }
+
+        public Event Event { get; set; }
     }
 }

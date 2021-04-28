@@ -4,14 +4,16 @@ using FindExactSolution.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FindExactSolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210428220252_RenameDescriptionToTitleQuestionTable")]
+    partial class RenameDescriptionToTitleQuestionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +34,21 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("TeamUsers");
+                });
+
+            modelBuilder.Entity("EventQuestion", b =>
+                {
+                    b.Property<Guid>("EventsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("QuestionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EventsId", "QuestionsId");
+
+                    b.HasIndex("QuestionsId");
+
+                    b.ToTable("EventQuestion");
                 });
 
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Event", b =>
@@ -72,9 +89,6 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
@@ -84,8 +98,6 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventId");
 
                     b.ToTable("Questions");
                 });
@@ -463,15 +475,19 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FindExactSolution.Domain.Entities.Question", b =>
+            modelBuilder.Entity("EventQuestion", b =>
                 {
-                    b.HasOne("FindExactSolution.Domain.Entities.Event", "Event")
-                        .WithMany("Questions")
-                        .HasForeignKey("EventId")
+                    b.HasOne("FindExactSolution.Domain.Entities.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Event");
+                    b.HasOne("FindExactSolution.Domain.Entities.Question", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Registration", b =>
@@ -555,8 +571,6 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Event", b =>
                 {
-                    b.Navigation("Questions");
-
                     b.Navigation("Registrations");
 
                     b.Navigation("Teams");

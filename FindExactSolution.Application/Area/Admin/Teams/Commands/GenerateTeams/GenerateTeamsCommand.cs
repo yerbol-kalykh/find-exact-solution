@@ -21,20 +21,18 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
     public class GenerateTeamsCommandHandler : IRequestHandler<GenerateTeamsCommand>
     {
         private readonly IApplicationDbContext _context;
-        private readonly IIdentityService _identityService;
 
         public GenerateTeamsCommandHandler(IApplicationDbContext context, IIdentityService identityService)
         {
             _context = context;
-            _identityService = identityService;
         }
 
         public async Task<Unit> Handle(GenerateTeamsCommand request, CancellationToken cancellationToken)
         {
             await DeletePreviousCreatedTeamsAsync(request.EventId);
 
-            var registrations = await _context.Registrations.Include(r=>r.User).Where(r => r.EventId == request.EventId 
-                                        && r.Status == RegistrationStatus.Registered).Select(r=>r.User).ToListAsync();
+            var registrations = await _context.Registrations.Include(r => r.User).Where(r => r.EventId == request.EventId
+                                          && r.Status == RegistrationStatus.Registered).Select(r => r.User).ToListAsync(cancellationToken);
 
             registrations.Shuffle();
 
@@ -42,9 +40,9 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
 
             var counter = 1;
 
-            foreach(var group in groups)
+            foreach (var group in groups)
             {
-                var team = new Team() { EventId = request.EventId, Users = group, Name=$"Team {counter++}"};
+                var team = new Team() { EventId = request.EventId, Users = group, Name = $"Team {counter++}" };
 
                 _context.Teams.Add(team);
             }
@@ -59,7 +57,7 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
             var teams = await _context.Teams.Where(t => t.EventId == eventId).ToListAsync();
 
             _context.Teams.RemoveRange(teams);
-           
+
         }
     }
 }

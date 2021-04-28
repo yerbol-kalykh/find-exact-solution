@@ -12,7 +12,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
                    .IsRequired()
                    .HasMaxLength(512);
 
-            builder.Property(t => t.Description)
+            builder.Property(t => t.Title)
                    .IsRequired();
         }
     }

@@ -31,7 +31,7 @@ namespace FindExactSolution.Application.Registrations.Commands
         {
             var registrationExists = await _context.Registrations.AnyAsync(r => r.EventId == request.EventId
                                         && r.UserId == _userService.UserId
-                                        && r.Status == RegistrationStatus.Registered);
+                                        && r.Status == RegistrationStatus.Registered, cancellationToken);
 
             if (registrationExists)
             {
