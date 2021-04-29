@@ -10,7 +10,7 @@ namespace FindExactSolution.Web.Client.Pages.Events
     public partial class EventsOverview
     {
         [Inject]
-        public IEventDataService EventDataService { get; set; }
+        public IEventService EventService { get; set; }
 
         private IEnumerable<EventResource> _events;
 
@@ -18,7 +18,7 @@ namespace FindExactSolution.Web.Client.Pages.Events
         {
             try
             {
-                _events = await EventDataService.GetAllEventsAsync();
+                _events = await EventService.GetAllEventsAsync();
             }
             catch (AccessTokenNotAvailableException exception)
             {

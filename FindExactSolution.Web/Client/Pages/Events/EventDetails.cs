@@ -14,10 +14,10 @@ namespace FindExactSolution.Web.Client.Pages.Events
         public Guid Id { get; set; }
 
         [Inject]
-        public IEventDataService EventDataService { get; set; }
+        public IEventService EventService { get; set; }
 
         [Inject]
-        public IRegistrationDataService RegistrationDataService { get; set; }
+        public IRegistrationService RegistrationService { get; set; }
 
         private EventDetailsResource _event;
 
@@ -25,7 +25,7 @@ namespace FindExactSolution.Web.Client.Pages.Events
         {
             try
             {
-                _event = await EventDataService.GetEventByIdAsync(Id);
+                _event = await EventService.GetEventByIdAsync(Id);
             }
             catch (AccessTokenNotAvailableException exception)
             {
@@ -37,9 +37,9 @@ namespace FindExactSolution.Web.Client.Pages.Events
         {
             var registrationResource = new CreateRegistrationResource() { EventId = _event.Id };
 
-            await RegistrationDataService.CreateRegistrationAsync(registrationResource);
+            await RegistrationService.CreateRegistrationAsync(registrationResource);
 
-            _event = await EventDataService.GetEventByIdAsync(Id);
+            _event = await EventService.GetEventByIdAsync(Id);
         }
     }
 }

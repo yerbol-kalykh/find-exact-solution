@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Common.Interfaces
 {
-    public interface IEventDataService
+    public interface IEventService
     {
         Task<IEnumerable<EventResource>> GetAllEventsAsync();
 

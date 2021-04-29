@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Areas.Admin.Services
 {
-    public class AdminTeamDataService : IAdminTeamDataService
+    public class AdminTeamService : IAdminTeamService
     {
         private readonly HttpClient _httpClient;
         private const string BaseEventApiUrl = "admin/api/teams";
 
-        public AdminTeamDataService(HttpClient httpClient)
+        public AdminTeamService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

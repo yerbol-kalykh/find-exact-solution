@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Services
 {
-    public class EventDataService : IEventDataService
+    public class EventService : IEventService
     {
         private readonly HttpClient _httpClient;
         private const string BaseEventApiUrl = "api/events";
 
-        public EventDataService(HttpClient httpClient)
+        public EventService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

@@ -10,7 +10,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
     public partial class Events
     {
         [Inject]
-        public IAdminEventDataService AdminEventDataService { get; set; }
+        public IAdminEventService AdminEventService { get; set; }
 
         private IEnumerable<AdminEventResource> _events;
 
@@ -18,7 +18,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         {
             try
             {
-                _events = await AdminEventDataService.GetAllEventsAsync();
+                _events = await AdminEventService.GetAllEventsAsync();
             }
             catch (AccessTokenNotAvailableException exception)
             {

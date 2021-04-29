@@ -6,6 +6,17 @@
 }
 else
 {
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <h5 class="card-title">@_event.Title</h5>
+            <h6 class="card-subtitle mb-2 text-muted"><span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h6>
+            <p class="card-text">The largest technical career events for jobs, internships and graduation projects in the Netherlands</p>
+            <a href="/events/@_event.Id/questions" class="card-link">Go to event</a>
+            @*<a href="#" class="card-link">Another link</a>*@
+        </div>
+    </div>
+
+
     <h3>@_event.Title <span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h3>
 
     <div class="progress">
@@ -47,13 +58,13 @@ else
 
                     @foreach (var member in _event.Team.Users)
                     {
-                    <tr>
-                        <td>@(++row)</td>
-                        <td>@member.UserName</td>
-                        <td>@member.FirstName</td>
-                        <td>@member.LastName</td>
-                        <td>@member.Email</td>
-                    </tr>
+                        <tr>
+                            <td>@(++row)</td>
+                            <td>@member.UserName</td>
+                            <td>@member.FirstName</td>
+                            <td>@member.LastName</td>
+                            <td>@member.Email</td>
+                        </tr>
                     }
                 </tbody>
             </table>

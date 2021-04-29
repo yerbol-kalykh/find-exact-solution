@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces
 {
-    public interface IAdminTeamDataService
+    public interface IAdminTeamService
     {
         Task GenerateTeamsAsync(GenerateTeamResource resource);
     }

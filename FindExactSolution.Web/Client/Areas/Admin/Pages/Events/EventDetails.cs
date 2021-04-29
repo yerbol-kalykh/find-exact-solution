@@ -14,10 +14,10 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         public Guid Id { get; set; }
 
         [Inject]
-        public IAdminEventDataService AdminEventDataService { get; set; }
+        public IAdminEventService AdminEventService { get; set; }
 
         [Inject]
-        public IAdminTeamDataService AdminTeamDataService { get; set; }
+        public IAdminTeamService AdminTeamService { get; set; }
 
         private AdminEventDetailResource _eventDetail;
 
@@ -25,7 +25,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         {
             try
             {
-                _eventDetail = await AdminEventDataService.GetEventDetailAsync(Id);
+                _eventDetail = await AdminEventService.GetEventDetailAsync(Id);
             }
             catch (AccessTokenNotAvailableException exception)
             {
@@ -37,7 +37,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         {
             var generateTeamResource = new GenerateTeamResource() { EventId = _eventDetail.Id };
 
-            await AdminTeamDataService.GenerateTeamsAsync(generateTeamResource);
+            await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Services
 {
-    public class RegistrationDataService : IRegistrationDataService
+    public class RegistrationService : IRegistrationService
     {
         private readonly HttpClient _httpClient;
         private const string BaseEventApiUrl = "api/registrations";
 
-        public RegistrationDataService(HttpClient httpClient)
+        public RegistrationService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

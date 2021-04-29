@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces
 {
-    public interface IAdminEventDataService
+    public interface IAdminEventService
     {
         Task<IEnumerable<AdminEventResource>> GetAllEventsAsync();
         Task<AdminEventDetailResource> GetEventDetailAsync(Guid id);

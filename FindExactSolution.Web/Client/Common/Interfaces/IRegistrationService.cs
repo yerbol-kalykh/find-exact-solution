@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Common.Interfaces
 {
-    public interface IRegistrationDataService
+    public interface IRegistrationService
     {
         Task CreateRegistrationAsync(CreateRegistrationResource resource);
     }
