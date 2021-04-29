@@ -11,7 +11,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
     public class AdminTeamService : IAdminTeamService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseEventApiUrl = "admin/api/teams";
+        private const string BaseTeamsApiUrl = "admin/api/teams";
 
         public AdminTeamService(HttpClient httpClient)
         {
@@ -22,7 +22,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
         {
             var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
 
-            await _httpClient.PostAsync($"{BaseEventApiUrl}/{resource.EventId}", resourceJson);
+            await _httpClient.PostAsync($"{BaseTeamsApiUrl}/{resource.EventId}", resourceJson);
         }
     }
 }
