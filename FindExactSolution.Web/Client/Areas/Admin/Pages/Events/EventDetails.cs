@@ -19,6 +19,9 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         [Inject]
         public IAdminTeamService AdminTeamService { get; set; }
 
+        [Inject]
+        public NavigationManager UriHelper { get; set; }
+
         private AdminEventDetailResource _eventDetail;
 
         protected override async Task OnInitializedAsync()
@@ -38,6 +41,11 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
             var generateTeamResource = new GenerateTeamResource() { EventId = _eventDetail.Id };
 
             await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
+        }
+
+        public void NavigateToCreateQuestion()
+        {
+            UriHelper.NavigateTo($"/admin/events/{Id}/questions/create");
         }
     }
 }

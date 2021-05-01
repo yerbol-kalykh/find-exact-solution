@@ -6,11 +6,93 @@
 }
 else
 {
-    <h3>Event @_eventDetail.Title</h3>
+    <h3>@_eventDetail.Title</h3>
 
-    <h4>Id : @_eventDetail.Id</h4>
+    <p class="lead">
+        <em>
+            @_eventDetail.Description
+        </em>
+    </p>
 
-    <div>
-        <button @onclick="GenerateTeamAsync">Generate teams</button>
+    <hr />
+
+    <h4>Questions</h4>
+
+    <button class="btn btn-success" @onclick=@NavigateToCreateQuestion>Create</button>
+
+    <div class="mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Point</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in _eventDetail.Questions)
+                {
+                    <tr>
+                        <td>@question.Id</td>
+                        <td>@question.Title</td>
+                        <td>@question.Point</td>
+                        <td>
+                            <a href="/admin/events/@Id/questions/@question.Id">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+
+    <h4>Registrations</h4>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>UserName</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var registration in _eventDetail.Registrations)
+            {
+                <tr>
+                    <td>@registration.FirstName</td>
+                    <td>@registration.LastName</td>
+                    <td>@registration.UserName</td>
+                    <td>@registration.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Teams</h4>
+
+    <button class="btn btn-success" @onclick="GenerateTeamAsync">Generate</button>
+
+    <div class="mt-4">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var team in _eventDetail.Teams)
+                {
+                    <tr>
+                        <td>@team.Id</td>
+                        <td>@team.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
 }

@@ -16,17 +16,21 @@ namespace FindExactSolution.Web.Client
             services.AddHttpClient<IEventService, EventService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            services.AddHttpClient<IAdminEventService, AdminEventService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
-                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-            services.AddHttpClient<IAdminTeamService, AdminTeamService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
-                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
             services.AddHttpClient<IRegistrationService, RegistrationService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             services.AddHttpClient<IQuestionService, QuestionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+
+            services.AddHttpClient<IAdminEventService, AdminEventService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+               .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            services.AddHttpClient<IAdminTeamService, AdminTeamService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            services.AddHttpClient<IAdminQuestionService, AdminQuestionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+                           .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             return services;
         }

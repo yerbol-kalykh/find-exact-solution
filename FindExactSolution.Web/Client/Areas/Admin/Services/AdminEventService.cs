@@ -11,7 +11,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
     public class AdminEventService : IAdminEventService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseEventApiUrl = "admin/api/events";
+        private const string BaseEventsApiUrl = "admin/api/events";
 
         public AdminEventService(HttpClient httpClient)
         {
@@ -20,12 +20,12 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
 
         public async Task<IEnumerable<AdminEventResource>> GetAllEventsAsync()
         {
-            return await _httpClient.GetFromJsonAsync<AdminEventResource[]>($"{BaseEventApiUrl}");
+            return await _httpClient.GetFromJsonAsync<AdminEventResource[]>($"{BaseEventsApiUrl}");
         }
 
         public async Task<AdminEventDetailResource> GetEventDetailAsync(Guid id)
         {
-            return await _httpClient.GetFromJsonAsync<AdminEventDetailResource>($"{BaseEventApiUrl}/{id}");
+            return await _httpClient.GetFromJsonAsync<AdminEventDetailResource>($"{BaseEventsApiUrl}/{id}");
         }
     }
 }

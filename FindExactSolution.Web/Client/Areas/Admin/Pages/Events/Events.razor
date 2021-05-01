@@ -11,7 +11,6 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -22,7 +21,6 @@ else
             @foreach (var singleEvent in _events)
             {
             <tr>
-                <td>@singleEvent.Id</td>
                 <td>@singleEvent.Title</td>
                 <td>@singleEvent.StartDateTime.ConvertToDefaultDateFormat()</td>
                 <td>@singleEvent.EndDateTime.ConvertToDefaultDateFormat()</td>

@@ -10,7 +10,7 @@ namespace FindExactSolution.Web.Client.Services
     public class RegistrationService : IRegistrationService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseEventApiUrl = "api/registrations";
+        private const string BaseRegistrationsApiUrl = "api/registrations";
 
         public RegistrationService(HttpClient httpClient)
         {
@@ -21,7 +21,7 @@ namespace FindExactSolution.Web.Client.Services
         {
             var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
 
-            await _httpClient.PostAsync($"{BaseEventApiUrl}", resourceJson);
+            await _httpClient.PostAsync($"{BaseRegistrationsApiUrl}", resourceJson);
         }
     }
 }

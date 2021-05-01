@@ -11,8 +11,14 @@ namespace FindExactSolution.Application.Area.Admin.Events.Models
 
         public string Title { get; set; }
 
+        public string Description { get; set; }
+
         public DateTime StartDate { get; set; }
 
-        public IEnumerable<TeamDto> Teams { get; set; }
+        public IEnumerable<EventTeamDto> Teams { get; set; }
+
+        public IEnumerable<EventRegistrationDto> Registrations { get; set; }
+
+        public IEnumerable<EventQuestionDto> Questions { get; set; }
     }
 }

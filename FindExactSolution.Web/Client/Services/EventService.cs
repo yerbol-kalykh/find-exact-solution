@@ -11,7 +11,7 @@ namespace FindExactSolution.Web.Client.Services
     public class EventService : IEventService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseEventApiUrl = "api/events";
+        private const string BaseEventsApiUrl = "api/events";
 
         public EventService(HttpClient httpClient)
         {
@@ -20,12 +20,12 @@ namespace FindExactSolution.Web.Client.Services
 
         public async Task<IEnumerable<EventResource>> GetAllEventsAsync()
         {
-            return await _httpClient.GetFromJsonAsync<EventResource[]>($"{BaseEventApiUrl}");
+            return await _httpClient.GetFromJsonAsync<EventResource[]>($"{BaseEventsApiUrl}");
         }
 
         public async Task<EventDetailsResource> GetEventByIdAsync(Guid id)
         {
-            return await _httpClient.GetFromJsonAsync<EventDetailsResource>($"{BaseEventApiUrl}/{id}");
+            return await _httpClient.GetFromJsonAsync<EventDetailsResource>($"{BaseEventsApiUrl}/{id}");
         }
     }
 }

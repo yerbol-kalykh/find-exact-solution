@@ -4,9 +4,12 @@ using System;
 
 namespace FindExactSolution.Application.Area.Admin.Events.Models
 {
-    public class TeamDto : IMapFrom<Team>
+    public class EventQuestionDto : IMapFrom<Question>
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+
+        public string Title { get; set; }
+
+        public int Point { get; set; }
     }
 }

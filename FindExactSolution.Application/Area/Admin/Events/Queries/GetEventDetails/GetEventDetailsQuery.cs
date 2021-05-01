@@ -31,7 +31,7 @@ namespace FindExactSolution.Application.Area.Admin.Events.Queries.GetEventDetail
 
         public async Task<EventDetailDto> Handle(GetEventDetailsQuery request, CancellationToken cancellationToken)
         {
-            var eventDetail = await _context.Events.Include(e=>e.Teams).FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var eventDetail = await _context.Events.Include(e=>e.Questions).Include(e=>e.Registrations).Include(e=>e.Teams).ThenInclude(t=>t.Users).FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
             if (eventDetail == null)
             {

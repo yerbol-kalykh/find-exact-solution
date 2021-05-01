@@ -2,7 +2,7 @@
 
 namespace FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Teams
 {
-    public class AdminTeamResource
+    public class AdminTeamEventResource
     {
         public Guid Id { get; set; }
 

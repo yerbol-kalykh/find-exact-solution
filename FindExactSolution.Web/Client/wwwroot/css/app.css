@@ -42,9 +42,18 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+    background: #f7f9fa;
+    padding: 10px 15px;
+    color: #263238;
+    line-height: 1.6;
+    font-size: 13px;
+    border-radius: 3px;
+}
