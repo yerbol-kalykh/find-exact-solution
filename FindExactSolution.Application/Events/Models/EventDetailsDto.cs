@@ -8,6 +8,8 @@ namespace FindExactSolution.Application.Events.Models
     {
         public Guid Id { get; set; }
 
+        public Guid EventId { get; set; }
+
         public string Title { get; set; }
 
         public DateTime StartDateTime { get; set; }

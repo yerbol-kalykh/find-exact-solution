@@ -1,0 +1,14 @@
+﻿@convertedMarkdown
+
+@code {
+    private MarkupString convertedMarkdown;
+
+    [Parameter]
+    public string Text { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        var html = Markdig.Markdown.ToHtml(Text ?? "");
+        convertedMarkdown = (MarkupString)html;
+    }
+}

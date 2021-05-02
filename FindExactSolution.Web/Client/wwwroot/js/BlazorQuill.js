@@ -13,6 +13,9 @@
         },
         getQuillHTML: function (quillControl) {
             return quillControl.__quill.root.innerHTML;
+        },
+        loadQuillHTMLContent: function (quillElement, quillHTMLContent) {
+            return quillElement.__quill.root.innerHTML = quillHTMLContent;
         }
     };
 })();

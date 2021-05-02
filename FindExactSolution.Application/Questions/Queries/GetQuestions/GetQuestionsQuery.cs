@@ -10,14 +10,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FindExactSolution.Application.Questions.Queries.GetEventQuestions
+namespace FindExactSolution.Application.Questions.Queries.GetQuestions
 {
-    public class GetEventQuestionsQuery : IRequest<IEnumerable<QuestionDto>>
+    public class GetQuestionsQuery : IRequest<IEnumerable<QuestionDto>>
     {
         public Guid EventId { get; set; }
     }
 
-    public class GetEventQuestionsQueryHandler : IRequestHandler<GetEventQuestionsQuery, IEnumerable<QuestionDto>>
+    public class GetEventQuestionsQueryHandler : IRequestHandler<GetQuestionsQuery, IEnumerable<QuestionDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace FindExactSolution.Application.Questions.Queries.GetEventQuestions
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<QuestionDto>> Handle(GetEventQuestionsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<QuestionDto>> Handle(GetQuestionsQuery request, CancellationToken cancellationToken)
         {
             return await _context.Questions.AsNoTracking()
                                            .Where(q=>q.EventId == request.EventId)

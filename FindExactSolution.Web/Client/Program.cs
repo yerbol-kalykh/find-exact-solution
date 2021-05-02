@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client
@@ -16,6 +17,8 @@ namespace FindExactSolution.Web.Client
             builder.Services.RegisterService(builder.HostEnvironment);
 
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("FindExactSolution.Web.ServerAPI"));
+
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             builder.Services.AddApiAuthorization();
 

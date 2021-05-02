@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQuestion
 {
-    public class CreateQuestionCommand : IRequest, IMapFrom<Question>
+    public class CreateQuestionCommand : IRequest<Guid>, IMapFrom<Question>
     {
         public Guid EventId { get; set; }
 
@@ -20,7 +20,7 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQues
         public int Point { get; set; }
     }
 
-    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand>
+    public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, Guid>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -31,7 +31,7 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQues
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateQuestionCommand request, CancellationToken cancellationToken)
         {
             var question = _mapper.Map<Question>(request);
 
@@ -39,7 +39,7 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQues
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return question.Id;
         }
     }
 }
