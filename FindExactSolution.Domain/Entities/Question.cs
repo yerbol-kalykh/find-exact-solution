@@ -14,6 +14,12 @@ namespace FindExactSolution.Domain.Entities
 
         public Guid EventId { get; set; }
 
+        public int Order { get; set; }
+
+        public string  Input { get; set; }
+
+        public string Answer { get; set; }
+
         public Event Event { get; set; }
     }
 }

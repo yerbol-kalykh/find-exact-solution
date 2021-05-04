@@ -14,5 +14,12 @@ namespace FindExactSolution.Web.Client.Common.Resources.Questions
         public string Body { get; set; }
 
         public int Point { get; set; }
+
+        public int Order { get; set; }
+
+        public string Input { get; set; }
+
+        [Required]
+        public string Answer { get; set; }
     }
 }

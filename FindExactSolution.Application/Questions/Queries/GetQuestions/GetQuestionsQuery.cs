@@ -32,6 +32,7 @@ namespace FindExactSolution.Application.Questions.Queries.GetQuestions
         {
             return await _context.Questions.AsNoTracking()
                                            .Where(q=>q.EventId == request.EventId)
+                                           .OrderBy(q=>q.Order)
                                            .ProjectTo<QuestionDto>(_mapper.ConfigurationProvider)
                                            .ToListAsync(cancellationToken);
         }

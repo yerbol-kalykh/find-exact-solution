@@ -1,31 +1,51 @@
 ﻿@page "/admin/events/{eventId:guid}/questions/create"
 
-<section class="question-create">
-    <h1 class="page-title">Create</h1>
+<div class="p-4">
+    <section class="question-create">
 
-    <EditForm Model="@CreateQuestionResource" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        <h2 class="page-title">Create a question</h2>
 
-        <div class="form-group">
-            <label for="title">Title </label>
-            <InputTextArea id="title" class="form-control" placeholder="Enter a title" @bind-Value="@CreateQuestionResource.Title"></InputTextArea>
-        </div>
+        <EditForm Model="@CreateQuestionResource" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-        <div class="form-group">
-            <label for="body">Body </label>
-            <QuillRichTextBox />
-            <div @ref="@DivEditorElement"/>
-        </div>
+            <div class="form-group">
+                <label for="title">Title </label>
+                <InputTextArea id="title" class="form-control" placeholder="Enter a title" @bind-Value="@CreateQuestionResource.Title"></InputTextArea>
+            </div>
 
-        <div class="form-group">
-            <label for="body">Point </label>
-            <InputNumber id="point" class="form-control" min="0" @bind-Value="@CreateQuestionResource.Point"></InputNumber>
-        </div>
+            <div class="form-group">
+                <label for="body">Order </label>
+                <InputNumber id="order" class="form-control" min="0" @bind-Value="@CreateQuestionResource.Order"></InputNumber>
+            </div>
 
-        <button type="submit" class="btn btn-success edit-btn">Create</button>
+            <div class="form-group">
+                <label for="body">Point </label>
+                <InputNumber id="point" class="form-control" min="0" @bind-Value="@CreateQuestionResource.Point"></InputNumber>
+            </div>
 
-        <button class="btn btn-danger edit-btn" @onclick="Cancel">Cancel</button>
+            <div class="form-group">
+                <label for="body">Body </label>
+                <QuillRichTextBox />
+                <div @ref="@DivEditorElement" />
+            </div>
 
-    </EditForm>
-</section>
+            <div class="form-group">
+                <label for="input">Input </label>
+                <InputTextArea id="input" class="form-control" placeholder="Enter an input" @bind-Value="@CreateQuestionResource.Input"></InputTextArea>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Answer </label>
+                <InputText id="answer" class="form-control" placeholder="Enter an answer" @bind-Value="@CreateQuestionResource.Answer"></InputText>
+            </div>
+
+            <button type="submit" class="btn btn-success edit-btn">Create</button>
+
+            <button class="btn btn-danger edit-btn" @onclick="Cancel">Cancel</button>
+
+        </EditForm>
+
+    </section>
+</div>
+

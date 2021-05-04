@@ -10,7 +10,6 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Models
         public string Title { get; set; }
         public string Body { get; set; }
         public int Point { get; set; }
-
-        public QuestionEventDto Event{ get; set; }
+        public QuestionEventDto Event { get; set; }
     }
 }

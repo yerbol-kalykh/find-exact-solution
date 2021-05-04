@@ -18,6 +18,12 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQues
         public string Body { get; set; }
 
         public int Point { get; set; }
+
+        public int Order { get; set; }
+
+        public string Input { get; set; }
+
+        public string Answer { get; set; }
     }
 
     public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, Guid>
