@@ -48,6 +48,8 @@ else
         </table>
     </div>
 
+    <hr />
+
     <h4>Registrations</h4>
 
     <table class="table table-striped">
@@ -72,27 +74,36 @@ else
         </tbody>
     </table>
 
+    <hr />
+
     <h4>Teams</h4>
 
     <button class="btn btn-success" @onclick="GenerateTeamAsync">Generate</button>
 
-    <div class="mt-4">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var team in _eventDetail.Teams)
-                {
+    @if (_eventDetail.Teams.Count() == 0)
+    {
+        <p style="margin-top:5px">No results found</p>
+    }
+    else
+    {
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@team.Id</td>
-                        <td>@team.Name</td>
+                        <th>Id</th>
+                        <th>Name</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var team in _eventDetail.Teams)
+                    {
+                        <tr>
+                            <td>@team.Id</td>
+                            <td>@team.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 }

@@ -6,40 +6,43 @@
 }
 else
 {
-    <div class="card" style="width: 30rem;">
+    <div class="card" style="width: 50rem; margin-bottom: 10px">
         <div class="card-body">
-            <h5 class="card-title">@_event.Title</h5>
-            <h6 class="card-subtitle mb-2 text-muted"><span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h6>
-            <p class="card-text">The largest technical career events for jobs, internships and graduation projects in the Netherlands</p>
-            <a href="/events/@_event.Id/questions" class="card-link">Go to event</a>
-            @*<a href="#" class="card-link">Another link</a>*@
+            <h4 class="card-title"><strong>@_event.Title</strong></h4>
+
+            <h5 class="card-subtitle mb-2 text-muted"><span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h5>
+
+            <p class="card-text font-italic">@_event.Description</p>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </div>
-    </div>
-
-
-    <h3>@_event.Title <span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h3>
-
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <br />
 
     @if (!_event.IsCurrentUserRegistered)
     {
-        <div class="alert alert-success" role="alert">
-            Registration for this event is available
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Registration for the @_event.Title is still open. <strong>Please register ASAP!</strong>
         </div>
 
         <button type="button" class="btn btn-info" @onclick="RegisterAsync">Register</button>
     }
     else
     {
-        <div class="alert alert-success" role="alert">
-            You have successfully registered for an event
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            You have successfully registered for an <strong>event</strong>
         </div>
 
-        @if (_event.Team != null)
+        @if (_event.Team == null)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               You have not been assigned to any <strong>teams</strong> yet
+            </div>
+        }
+        else
         {
             <h4>@_event.Team.Name</h4>
 

@@ -18,7 +18,7 @@ namespace FindExactSolution.Web.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetById([FromRoute] Guid id)
+        public async Task<ActionResult<IEnumerable<EventDetailsDto>>> GetById([FromRoute] Guid id)
         {
             if (id == Guid.Empty) return BadRequest();
 

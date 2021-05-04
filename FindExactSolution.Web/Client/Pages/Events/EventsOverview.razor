@@ -12,10 +12,11 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
+                <th>Description</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Days left</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,10 +24,11 @@ else
             @foreach (var singleEvent in _events)
             {
             <tr>
-                <td>@singleEvent.Id</td>
                 <td>@singleEvent.Title</td>
+                <td title="@singleEvent.Description">@singleEvent.Description.TruncateLongString(50) ...</td>
                 <td>@singleEvent.StartDateTime.ConvertToDefaultDateFormat()</td>
                 <td>@singleEvent.EndDateTime.ConvertToDefaultDateFormat()</td>
+                <td style="text-align:center">@singleEvent.StartDateTime.GetDaysLeft()</td>
                 <td>
                     <a href="/events/@singleEvent.Id">View</a>
                 </td>
