@@ -1,33 +1,40 @@
-﻿@page "/admin/events/{eventId:guid}/questions/{id:guid}/edit"
+﻿@page "/admin/events/{eventId:guid}/challenges/{challengeId:guid}/questions/{id:guid}/edit"
 
-<section class="question-edit">
-    <h1 class="page-title">Edit</h1>
+<div class="p-4">
+    <section class="question-edit">
 
-    <EditForm Model="@EditQuestionResource" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        <h2 class="page-title">Edit</h2>
 
-        <div class="form-group">
-            <label for="title">Title </label>
-            <InputTextArea id="title" class="form-control" placeholder="Enter a title" @bind-Value="@EditQuestionResource.Title"></InputTextArea>
-        </div>
+        <EditForm Model="@AdminQuestionEditResource" OnValidSubmit="@HandleValidSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
-        <div class="form-group">
-            <label for="body">Body </label>
-            <QuillRichTextBox />
-            <div @ref="@DivEditorElement" />
-        </div>
+            <div class="form-group">
+                <label for="body">Description </label>
+                <QuillRichTextBox />
+                <div @ref="@DivEditorElement" />
+            </div>
 
-        <div class="form-group">
-            <label for="body">Point </label>
-            <InputNumber id="point" class="form-control" min="0" @bind-Value="@EditQuestionResource.Point"></InputNumber>
-        </div>
+            <div class="form-group">
+                <label for="body">Point </label>
+                <InputNumber id="point" class="form-control" min="0" @bind-Value="@AdminQuestionEditResource.Point"></InputNumber>
+            </div>
 
-        <button type="submit" class="btn btn-info edit-btn">Save</button>
+            <div class="form-group">
+                <label for="input">Input </label>
+                <InputTextArea id="input" class="form-control" placeholder="Enter an input" @bind-Value="@AdminQuestionEditResource.Input"></InputTextArea>
+            </div>
 
-        <button class="btn btn-danger edit-btn" @onclick="Cancel">Cancel</button>
+            <div class="form-group">
+                <label for="title">Answer </label>
+                <InputText id="answer" class="form-control" placeholder="Enter an answer" @bind-Value="@AdminQuestionEditResource.Answer"></InputText>
+            </div>
 
-    </EditForm>
-</section>
+            <button type="submit" class="btn btn-success edit-btn">Save</button>
 
-<br/>
+            <button class="btn btn-danger edit-btn" @onclick="Cancel">Cancel</button>
+
+        </EditForm>
+    </section>
+</div>
+

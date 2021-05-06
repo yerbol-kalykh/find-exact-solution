@@ -11,9 +11,11 @@ namespace FindExactSolution.Application.Common.Interfaces
 
         DbSet<Event> Events { get; set; }
 
-        DbSet<Question> Questions { get; set; }
+        DbSet<Challenge> Challenges { get; set; }
 
         DbSet<Registration> Registrations { get; set; }
+
+        DbSet<Question> Questions { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

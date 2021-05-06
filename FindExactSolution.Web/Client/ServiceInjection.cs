@@ -19,7 +19,7 @@ namespace FindExactSolution.Web.Client
             services.AddHttpClient<IRegistrationService, RegistrationService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            services.AddHttpClient<IQuestionService, QuestionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+            services.AddHttpClient<IChallengeService, ChallengeService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 
@@ -29,8 +29,11 @@ namespace FindExactSolution.Web.Client
             services.AddHttpClient<IAdminTeamService, AdminTeamService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-            services.AddHttpClient<IAdminQuestionService, AdminQuestionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+            services.AddHttpClient<IAdminChallengeService, AdminChallengeService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                            .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            services.AddHttpClient<IAdminQuestionService, AdminQuestionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+                          .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             return services;
         }

@@ -1,0 +1,59 @@
+﻿@page "/admin/events/{eventId:guid}/challenges/{id:guid}"
+
+
+@if (_challengeDetails == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h4>
+        <strong>@_challengeDetails.Title</strong>
+    </h4>
+
+    <p>
+        <mark>
+            <a href="/admin/events/@_challengeDetails.Event.Id">@_challengeDetails.Event.Title</a>
+        </mark>
+    </p>
+
+    <button class="btn btn-info" @onclick=@NavigateToEditChallenge>Edit</button>
+
+    <hr />
+
+    <Markdown Text="@_challengeDetails.Body" />
+
+    <hr />
+
+    <h4>Questions</h4>
+
+    <div>
+        <button class="btn btn-success" @onclick=@NavigateToCreateQuestion>Create</button>
+    </div>
+    
+    <br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Input</th>
+                <th>Answer</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in _challengeDetails.Questions)
+            {
+            <tr>
+                <td><Markdown Text="@question.Description" /></td>
+                <td>@question.Input</td>
+                <td>@question.Answer</td>
+                <td>
+                    <a href="/admin/events/@Id/challenges/@_challengeDetails.Id/questions/@question.Id/edit">Edit</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

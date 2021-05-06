@@ -6,20 +6,16 @@ namespace FindExactSolution.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        public string Description { get; set; }
 
-        public string Body { get; set; }
-
-        public int Point { get; set; }
-
-        public Guid EventId { get; set; }
-
-        public int Order { get; set; }
-
-        public string  Input { get; set; }
+        public string Input { get; set; }
 
         public string Answer { get; set; }
 
-        public Event Event { get; set; }
+        public int Point { get; set; }
+
+        public Guid ChallengeId { get; set; }
+
+        public Challenge Challenge { get; set; }
     }
 }

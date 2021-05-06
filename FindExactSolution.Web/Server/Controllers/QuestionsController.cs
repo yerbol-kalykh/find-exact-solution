@@ -1,17 +1,10 @@
-﻿using FindExactSolution.Application.Questions.Queries.GetQuestions;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace FindExactSolution.Web.Server.Controllers
 {
-    [Route("api/events/{eventId}/questions")]
+    [Route("api/challenges/{challengeId:guid}/questions")]
     public class QuestionsController : ApiControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult> GetAll([FromRoute] Guid eventId)
-        {
-            return Ok(await Mediator.Send(new GetQuestionsQuery { EventId = eventId }));
-        }
+        
     }
 }

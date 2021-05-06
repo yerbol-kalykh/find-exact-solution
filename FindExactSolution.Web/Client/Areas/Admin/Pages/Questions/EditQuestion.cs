@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces;
-using FindExactSolution.Web.Client.Common.Resources.Questions;
+using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Questions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.JSInterop;
@@ -15,13 +15,10 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
         public Guid EventId { get; set; }
 
         [Parameter]
+        public Guid ChallengeId { get; set; }
+
+        [Parameter]
         public Guid Id { get; set; }
-
-        [Inject]
-        public IAdminEventService AdminEventService { get; set; }
-
-        [Inject]
-        public IAdminQuestionService AdminQuestionService { get; set; }
 
         [Inject]
         public NavigationManager UriHelper { get; set; }
@@ -30,24 +27,28 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
         public IJSRuntime JSRuntime { get; set; }
 
         [Inject]
-        public IMapper Mapper { get; set; } 
+        public IMapper Mapper { get; set; }
+
+        [Inject]
+        public IAdminQuestionService AdminQuestionService { get; set; }
 
         public ElementReference DivEditorElement { get; set; }
 
-        public EditQuestionResource EditQuestionResource { get; set; } = new EditQuestionResource();
+        public AdminQuestionEditResource AdminQuestionEditResource { get; set; } = new AdminQuestionEditResource();
+
 
         protected override async Task OnInitializedAsync()
         {
             try
             {
-                var questionDetail = await AdminQuestionService.GetQuestionDetailsAsync(EventId, Id);
+                var questionDetails = await AdminQuestionService.GetQuestionDetailsAsync(ChallengeId, Id);
 
-                if (questionDetail == null) UriHelper.NavigateTo($"/admin/events");
+                if (questionDetails == null) UriHelper.NavigateTo($"/admin/events");
                 else
                 {
-                    Mapper.Map(questionDetail,EditQuestionResource);
+                    Mapper.Map(questionDetails, AdminQuestionEditResource);
 
-                    await JSRuntime.InvokeAsync<object>("QuillFunctions.loadQuillHTMLContent", DivEditorElement, questionDetail.Body);
+                    await JSRuntime.InvokeAsync<object>("QuillFunctions.loadQuillHTMLContent", DivEditorElement, AdminQuestionEditResource.Description);
                 }
             }
             catch (AccessTokenNotAvailableException exception)
@@ -66,16 +67,16 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
 
         protected async Task HandleValidSubmit()
         {
-            EditQuestionResource.Body = await JSRuntime.InvokeAsync<string>("QuillFunctions.getQuillHTML", DivEditorElement);
+            AdminQuestionEditResource.Description = await JSRuntime.InvokeAsync<string>("QuillFunctions.getQuillHTML", DivEditorElement);
 
-            await AdminQuestionService.UpdateQuestionAsync(EditQuestionResource);
+            await AdminQuestionService.UpdateQuestionAsync(AdminQuestionEditResource);
 
-            UriHelper.NavigateTo($"/admin/events/{EventId}/questions/{Id}");
+            UriHelper.NavigateTo($"/admin/events/{EventId}/challenges/{ChallengeId}");
         }
 
         public void Cancel()
         {
-            UriHelper.NavigateTo($"/admin/events/{EventId}");
+            UriHelper.NavigateTo($"/admin/events/{EventId}/challenges/{ChallengeId}");
         }
     }
 }

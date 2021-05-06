@@ -1,4 +1,4 @@
-﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Questions;
+﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Challenges;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Registrations;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Teams;
 using System;
@@ -22,13 +22,13 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Events
 
         public IEnumerable<AdminRegistrationEventResource> Registrations { get; set; }
 
-        public IEnumerable<AdminQuestionEventResource> Questions { get; set; }
+        public IEnumerable<AdminChallengeEventResource> Challenges { get; set; }
 
         public AdminEventDetailResource()
         {
             Teams = new List<AdminTeamEventResource>();
             Registrations = new List<AdminRegistrationEventResource>();
-            Questions = new List<AdminQuestionEventResource>();
+            Challenges = new List<AdminChallengeEventResource>();
         }
     }
 }

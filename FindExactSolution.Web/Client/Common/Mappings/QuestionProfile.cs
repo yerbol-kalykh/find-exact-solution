@@ -8,8 +8,9 @@ namespace FindExactSolution.Web.Client.Common.Mappings
     {
         public QuestionProfile()
         {
-            CreateMap<AdminQuestionDetailsResource, EditQuestionResource>()
-                      .ForMember(e=>e.EventId, src => src.MapFrom(q=>q.Event.Id));
+            CreateMap<AdminQuestionDetailsResource, AdminQuestionEditResource>();
+
+            CreateMap<QuestionChallengeResource, QuestionSubmitResource>();
         }
     }
 }

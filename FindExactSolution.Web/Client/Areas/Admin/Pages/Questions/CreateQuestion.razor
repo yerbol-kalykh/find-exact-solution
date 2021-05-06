@@ -1,43 +1,34 @@
-﻿@page "/admin/events/{eventId:guid}/questions/create"
+﻿@page "/admin/events/{eventId:guid}/challenges/{challengeId:guid}/questions/create"
 
 <div class="p-4">
     <section class="question-create">
 
-        <h2 class="page-title">Create a question</h2>
+        <h2 class="page-title">Create</h2>
 
-        <EditForm Model="@CreateQuestionResource" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@AdminQuestionCreateResource" OnValidSubmit="@HandleValidSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
 
             <div class="form-group">
-                <label for="title">Title </label>
-                <InputTextArea id="title" class="form-control" placeholder="Enter a title" @bind-Value="@CreateQuestionResource.Title"></InputTextArea>
-            </div>
-
-            <div class="form-group">
-                <label for="body">Order </label>
-                <InputNumber id="order" class="form-control" min="0" @bind-Value="@CreateQuestionResource.Order"></InputNumber>
-            </div>
-
-            <div class="form-group">
-                <label for="body">Point </label>
-                <InputNumber id="point" class="form-control" min="0" @bind-Value="@CreateQuestionResource.Point"></InputNumber>
-            </div>
-
-            <div class="form-group">
-                <label for="body">Body </label>
+                <label for="body">Description </label>
                 <QuillRichTextBox />
                 <div @ref="@DivEditorElement" />
             </div>
 
             <div class="form-group">
+                <label for="body">Point </label>
+                <InputNumber id="point" class="form-control" min="0" @bind-Value="@AdminQuestionCreateResource.Point"></InputNumber>
+            </div>
+
+
+            <div class="form-group">
                 <label for="input">Input </label>
-                <InputTextArea id="input" class="form-control" placeholder="Enter an input" @bind-Value="@CreateQuestionResource.Input"></InputTextArea>
+                <InputTextArea id="input" class="form-control" placeholder="Enter an input" @bind-Value="@AdminQuestionCreateResource.Input"></InputTextArea>
             </div>
 
             <div class="form-group">
                 <label for="title">Answer </label>
-                <InputText id="answer" class="form-control" placeholder="Enter an answer" @bind-Value="@CreateQuestionResource.Answer"></InputText>
+                <InputText id="answer" class="form-control" placeholder="Enter an answer" @bind-Value="@AdminQuestionCreateResource.Answer"></InputText>
             </div>
 
             <button type="submit" class="btn btn-success edit-btn">Create</button>

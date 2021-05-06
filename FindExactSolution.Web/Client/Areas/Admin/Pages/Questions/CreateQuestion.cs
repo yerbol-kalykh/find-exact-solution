@@ -1,5 +1,5 @@
 ﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces;
-using FindExactSolution.Web.Client.Common.Resources.Questions;
+using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Questions;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
@@ -12,6 +12,9 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
         [Parameter]
         public Guid EventId { get; set; }
 
+        [Parameter]
+        public Guid ChallengeId { get; set; }
+
         [Inject]
         public NavigationManager UriHelper { get; set; }
 
@@ -23,7 +26,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
 
         public ElementReference DivEditorElement { get; set; }
 
-        public CreateQuestionResource CreateQuestionResource { get; set; } = new CreateQuestionResource();
+        public AdminQuestionCreateResource AdminQuestionCreateResource { get; set; } = new AdminQuestionCreateResource();
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -35,28 +38,33 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Questions
 
         protected override void OnInitialized()
         {
-            CreateQuestionResource.EventId = EventId;
+            AdminQuestionCreateResource.ChallengeId = ChallengeId;
         }
 
         protected async Task HandleValidSubmit()
         {
-            CreateQuestionResource.Body = await JSRuntime.InvokeAsync<string>("QuillFunctions.getQuillHTML", DivEditorElement);
+            AdminQuestionCreateResource.Description = await JSRuntime.InvokeAsync<string>("QuillFunctions.getQuillHTML", DivEditorElement);
 
-            var createId = await AdminQuestionService.CreateQuestionAsync(CreateQuestionResource);
+            var createId = await AdminQuestionService.CreateQuestionAsync(AdminQuestionCreateResource);
 
-            if(createId == Guid.Empty)
+            if (createId == Guid.Empty)
             {
-               
+
             }
             else
             {
-                UriHelper.NavigateTo($"/admin/events/{EventId}/questions/{createId}");
+                NavigateToChallengeDetailsPage();
             }
         }
 
         public void Cancel()
         {
-            UriHelper.NavigateTo($"/admin/events/{EventId}");
+            NavigateToChallengeDetailsPage();
+        }
+
+        private void NavigateToChallengeDetailsPage()
+        {
+            UriHelper.NavigateTo($"/admin/events/{EventId}/challenges/{ChallengeId}");
         }
     }
 }

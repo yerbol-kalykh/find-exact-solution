@@ -34,6 +34,34 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.ToTable("TeamUsers");
                 });
 
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Challenge", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Challenges");
+                });
+
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Event", b =>
                 {
                     b.Property<Guid>("Id")
@@ -78,31 +106,23 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Body")
+                    b.Property<Guid>("ChallengeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("EventId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Input")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex("ChallengeId");
 
                     b.ToTable("Questions");
                 });
@@ -480,15 +500,26 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FindExactSolution.Domain.Entities.Question", b =>
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Challenge", b =>
                 {
                     b.HasOne("FindExactSolution.Domain.Entities.Event", "Event")
-                        .WithMany("Questions")
+                        .WithMany("Challenges")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Question", b =>
+                {
+                    b.HasOne("FindExactSolution.Domain.Entities.Challenge", "Challenge")
+                        .WithMany("Questions")
+                        .HasForeignKey("ChallengeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Challenge");
                 });
 
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Registration", b =>
@@ -570,9 +601,14 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("FindExactSolution.Domain.Entities.Event", b =>
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Challenge", b =>
                 {
                     b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Event", b =>
+                {
+                    b.Navigation("Challenges");
 
                     b.Navigation("Registrations");
 

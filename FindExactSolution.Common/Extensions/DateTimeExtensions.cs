@@ -9,6 +9,11 @@ namespace FindExactSolution.Common.Extensions
             return date.ToString("dd MMMM yyyy H:mm");
         }
 
+        public static string ConvertToDefaultTimeFormat(this DateTime date)
+        {
+            return date.ToString("H:mm");
+        }
+
         public static int GetDaysLeft(this DateTime date)
         {
             var nextSelectedDate = date.AddYears(DateTime.Today.Year - date.Year);

@@ -15,10 +15,10 @@ namespace FindExactSolution.Application.Area.Admin.Events.Models
 
         public DateTime StartDate { get; set; }
 
-        public IEnumerable<EventTeamDto> Teams { get; set; }
+        public IEnumerable<TeamEventDto> Teams { get; set; }
 
-        public IEnumerable<EventRegistrationDto> Registrations { get; set; }
+        public IEnumerable<RegistrationEventDto> Registrations { get; set; }
 
-        public IEnumerable<EventQuestionDto> Questions { get; set; }
+        public IEnumerable<ChallengeEventDto> Challenges { get; set; }
     }
 }

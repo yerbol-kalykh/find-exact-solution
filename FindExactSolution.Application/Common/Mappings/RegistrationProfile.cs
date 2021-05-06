@@ -8,7 +8,7 @@ namespace FindExactSolution.Application.Common.Mappings
     {
         public RegistrationProfile()
         {
-            CreateMap<Registration, EventRegistrationDto>()
+            CreateMap<Registration, RegistrationEventDto>()
                      .ForMember(er => er.FirstName, src => src.MapFrom(r => r.User.FirstName))
                      .ForMember(er => er.LastName, src => src.MapFrom(r => r.User.LastName))
                      .ForMember(er => er.Email, src => src.MapFrom(r => r.User.Email))

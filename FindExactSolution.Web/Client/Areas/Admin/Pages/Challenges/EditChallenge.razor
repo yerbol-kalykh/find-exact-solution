@@ -1,0 +1,28 @@
+﻿@page "/admin/events/{eventId:guid}/challenges/{id:guid}/edit"
+
+<section class="challenge-edit">
+    <h1 class="page-title">Edit</h1>
+
+    <EditForm Model="@AdminChallengeEditResource" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="title">Title </label>
+            <InputTextArea id="title" class="form-control" placeholder="Enter a title" @bind-Value="@AdminChallengeEditResource.Title"></InputTextArea>
+        </div>
+
+        <div class="form-group">
+            <label for="body">Body </label>
+            <QuillRichTextBox />
+            <div @ref="@DivEditorElement" />
+        </div>
+
+        <button type="submit" class="btn btn-info edit-btn">Save</button>
+
+        <button class="btn btn-danger edit-btn" @onclick="Cancel">Cancel</button>
+
+    </EditForm>
+</section>
+
+<br/>

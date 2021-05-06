@@ -8,21 +8,13 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Question> builder)
         {
-            builder.Property(t => t.Title)
-                   .IsRequired()
-                   .HasMaxLength(512);
+            builder.Property(x => x.Point).IsRequired();
 
-            builder.Property(t => t.Body)
-                   .IsRequired();
+            builder.Property(x => x.Description).IsRequired();
 
-            builder.Property(t => t.Order)
-                   .IsRequired();
+            builder.Property(x => x.Input).IsRequired();
 
-            builder.Property(t => t.Input)
-                   .IsRequired();
-
-            builder.Property(t => t.Answer)
-                   .IsRequired();
+            builder.Property(x => x.Answer).IsRequired();
         }
     }
 }

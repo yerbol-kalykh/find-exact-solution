@@ -43,9 +43,9 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
             await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
         }
 
-        public void NavigateToCreateQuestion()
+        public void NavigateToCreateChallenge()
         {
-            UriHelper.NavigateTo($"/admin/events/{Id}/questions/create");
+            UriHelper.NavigateTo($"/admin/events/{Id}/challenges/create");
         }
     }
 }

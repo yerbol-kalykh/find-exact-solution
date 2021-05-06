@@ -11,19 +11,11 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Commands.CreateQues
 {
     public class CreateQuestionCommand : IRequest<Guid>, IMapFrom<Question>
     {
-        public Guid EventId { get; set; }
-
-        public string Title { get; set; }
-
-        public string Body { get; set; }
-
-        public int Point { get; set; }
-
-        public int Order { get; set; }
-
+        public Guid ChallengeId { get; set; }
+        public string Description { get; set; }
         public string Input { get; set; }
-
         public string Answer { get; set; }
+        public int Point { get; set; }
     }
 
     public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionCommand, Guid>

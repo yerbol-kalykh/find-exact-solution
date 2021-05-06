@@ -16,9 +16,9 @@ else
 
     <hr />
 
-    <h4>Questions</h4>
+    <h4>Challenges</h4>
 
-    <button class="btn btn-success" @onclick=@NavigateToCreateQuestion>Create</button>
+    <button class="btn btn-success" @onclick=@NavigateToCreateChallenge>Create</button>
 
     <div class="mt-4">
         <table class="table table-striped">
@@ -26,21 +26,19 @@ else
                 <tr>
                     <th>Id</th>
                     <th>Title</th>
-                    <th>Point</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var question in _eventDetail.Questions)
+                @foreach (var challenge in _eventDetail.Challenges)
                 {
                     <tr>
-                        <td>@question.Id</td>
-                        <td>@question.Title</td>
-                        <td>@question.Point</td>
+                        <td>@challenge.Id</td>
+                        <td>@challenge.Title</td>
                         <td>
-                            <a href="/admin/events/@Id/questions/@question.Id">View</a>
+                            <a href="/admin/events/@Id/challenges/@challenge.Id">View</a>
                             |
-                            <a href="/admin/events/@Id/questions/@question.Id/edit">Edit</a>
+                            <a href="/admin/events/@Id/challenges/@challenge.Id/edit">Edit</a>
                         </td>
                     </tr>
                 }

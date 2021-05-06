@@ -5,7 +5,7 @@
                 modules: {
                     toolbar: '#toolbar'
                 },
-                placeholder: 'Compose a question...',
+                placeholder: 'Compose a challenge...',
                 readOnly: false,
                 theme: 'snow'
             };

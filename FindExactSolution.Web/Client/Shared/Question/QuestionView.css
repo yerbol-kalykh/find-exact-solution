@@ -1,9 +1,0 @@
-﻿.question-point {
-    display: flex;
-    white-space: nowrap;
-    -webkit-box-align: center;
-    align-items: center;
-    font-size: 12px;
-    color: rgb(84, 110, 122);
-    line-height: 20px;
-}

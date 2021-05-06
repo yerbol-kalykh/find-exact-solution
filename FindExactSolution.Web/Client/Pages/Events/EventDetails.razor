@@ -8,19 +8,26 @@ else
 {
     <div class="card" style="width: 50rem; margin-bottom: 10px">
         <div class="card-body">
-            <h4 class="card-title"><strong>@_event.Title</strong></h4>
+            <h4 class="card-title">
+                <strong>@_event.Title</strong>
+            </h4>
 
-            <h5 class="card-subtitle mb-2 text-muted"><span class="badge badge-info">@_event.StartDateTime.ConvertToDefaultDateFormat()</span></h5>
+            <h5 class="card-subtitle mb-2 text-muted">
+                <span class="badge badge-info">
+                    @_event.StartDateTime.ConvertToDefaultDateFormat()
+                    - @_event.EndDateTime.ConvertToDefaultTimeFormat()
+                </span>
+                <small><a href="/events/@_event.Id/challenges" class="card-link">Go to challenges</a></small>
+            </h5>
 
-            <p class="card-text font-italic">@_event.Description</p>
+        <p class="card-text font-italic">@_event.Description</p>
 
-            <div class="progress">
-                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
         </div>
     </div>
-
-    <br />
 
     @if (!_event.IsCurrentUserRegistered)
     {
