@@ -12,8 +12,10 @@ namespace FindExactSolution.Domain.Entities
 
         public Guid EventId { get; set; }
 
+        public Event Event { get; set; }
+
         public IList<IUser> Users { get; set; } = new List<IUser>();
 
-        public Event Event { get; set; }
+        public IList<QuestionSubmission> QuestionSubmissions = new List<QuestionSubmission>();
     }
 }

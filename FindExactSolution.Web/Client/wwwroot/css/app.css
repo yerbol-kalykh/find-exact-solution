@@ -68,3 +68,10 @@ pre {
     color: #fff;
     background-color: #6f42c1;
 }
+
+.alert-submit-message {
+    margin-bottom: 1px;
+    height: 35px;
+    line-height: 30px;
+    padding: 0px 15px;
+}

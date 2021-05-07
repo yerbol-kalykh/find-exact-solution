@@ -1,25 +1,23 @@
-﻿<!--<form class="form-inline">
-    <div class="form-group mb-2">
-        <label for="answer" class="col-form-label">Answer</label>-->
-        @*<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">*@
-    <!--</div>
-    <div class="form-group mx-sm-3 mb-2">
-        <label for="inputPassword2" class="sr-only">Password</label>
-        <InputText class="form-control" Value="@Answer">
-        </InputText>-->
-        @*<InputText class="form-control" id="answer" placeholder="Enter an answer" @bind-Value="@ProblemSubmit.Answer"></InputText>*@
-    <!--</div>
-    <button class="btn btn-info edit-btn" @onclick="() => SubmitAnswer(problem.Id)"> Submit </button>-->
-    @*<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>*@
-<!--</form>-->
-<EditForm class="form-inline" Model="@QuestionSubmitResource" OnValidSubmit="@HandleValidSubmit">
-    <div class="form-group mb-2">
-        <label for="staticEmail2" class="sr-only">Email</label>
-        <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-    </div>
-    <div class="form-group mx-sm-3 mb-2">
-        <label for="inputPassword2" class="sr-only">Password</label>
-        <InputText class="form-control" id="answer" placeholder="Enter an answer" @bind-Value="@QuestionSubmitResource.Answer"></InputText>
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Submit</button>
-</EditForm>
+﻿<div>
+    <p class="mt-2 mb-2">
+        <Markdown Text="@QuestionChallengeResource.Description" />
+    </p>
+
+    <p>
+        To begin, <a href="" @onclick="DownloadInput" @onclick:preventDefault>get your input.</a>
+    </p>
+
+    <EditForm class="form-inline" Model="@SubmitAnswerResource" OnValidSubmit="@HandleValidSubmit">
+        <div class="form-group mb-2">
+            <label for="inputPassword2" class="col-form-label"><strong>Answer</strong></label>
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="inputPassword2" class="sr-only">Answer</label>
+            <InputText class="form-control form-control-sm" id="answer" @bind-Value="@SubmitAnswerResource.Answer"></InputText>
+        </div>
+        
+        <button type="submit" class="btn btn-info mb-2 btn-sm">Submit</button>
+
+        <div class="alert @StatusClass mx-sm-3 mb-2 alert-submit-message">@Message</div>
+    </EditForm>
+</div>

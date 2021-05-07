@@ -6,6 +6,8 @@ namespace FindExactSolution.Web.Client.Common.Resources.Questions
     {
         public Guid Id { get; set; }
 
+        public Guid ChallengeId { get; set; }
+
         public string Description { get; set; }
 
         public string Input { get; set; }

@@ -22,6 +22,9 @@ namespace FindExactSolution.Web.Client
             services.AddHttpClient<IChallengeService, ChallengeService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+            services.AddHttpClient<IQuestionSubmissionService, QuestionSubmissionService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+                      .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
 
             services.AddHttpClient<IAdminEventService, AdminEventService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();

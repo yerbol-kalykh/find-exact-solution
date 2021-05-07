@@ -17,6 +17,11 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
             builder.HasMany(t => (ICollection<ApplicationUser>)t.Users)
                    .WithMany(u => u.Teams)
                    .UsingEntity(j => j.ToTable("TeamUsers"));
+
+            builder.HasOne(e => e.Event)
+                   .WithMany(t => t.Teams)
+                   .HasForeignKey(e => e.EventId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

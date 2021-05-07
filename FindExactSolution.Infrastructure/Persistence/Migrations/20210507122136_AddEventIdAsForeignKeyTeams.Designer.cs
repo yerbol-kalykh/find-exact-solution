@@ -4,14 +4,16 @@ using FindExactSolution.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FindExactSolution.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507122136_AddEventIdAsForeignKeyTeams")]
+    partial class AddEventIdAsForeignKeyTeams
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,7 +138,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastSubmittedDateTime")
+                    b.Property<DateTime>("LastSumbittedDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("QuestionId")
@@ -184,7 +186,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("EventId")
+                    b.Property<Guid?>("EventId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -590,8 +592,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.HasOne("FindExactSolution.Domain.Entities.Event", "Event")
                         .WithMany("Teams")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Event");
                 });

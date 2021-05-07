@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FindExactSolution.Domain.Entities
 {
@@ -17,5 +18,7 @@ namespace FindExactSolution.Domain.Entities
         public Guid ChallengeId { get; set; }
 
         public Challenge Challenge { get; set; }
+
+        public IList<QuestionSubmission> QuestionSubmissions { get; set; } = new List<QuestionSubmission>();
     }
 }
