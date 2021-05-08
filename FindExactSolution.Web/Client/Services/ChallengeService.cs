@@ -1,7 +1,6 @@
 ﻿using FindExactSolution.Web.Client.Common.Interfaces;
 using FindExactSolution.Web.Client.Common.Resources.Challenges;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -18,9 +17,9 @@ namespace FindExactSolution.Web.Client.Services
             _httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<ChallengeResource>> GetAllChallengesAsync(Guid eventId)
+        public async Task<ChallengesResultResource> GetAllChallengesAsync(Guid eventId)
         {
-            return await _httpClient.GetFromJsonAsync<ChallengeResource[]>($"{string.Format(BaseChallengesApiUrl, eventId)}");
+            return await _httpClient.GetFromJsonAsync<ChallengesResultResource>($"{string.Format(BaseChallengesApiUrl, eventId)}");
         }
     }
 }

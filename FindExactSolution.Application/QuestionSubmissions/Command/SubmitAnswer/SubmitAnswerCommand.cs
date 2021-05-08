@@ -1,16 +1,19 @@
-﻿using FindExactSolution.Application.Common.Exceptions;
+﻿using AutoMapper;
+using FindExactSolution.Application.Challenges.Models;
+using FindExactSolution.Application.Common.Exceptions;
 using FindExactSolution.Application.Common.Interfaces;
 using FindExactSolution.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.QuestionSubmissions.Command.SubmitAnswer
 {
-    public class SubmitAnswerCommand : IRequest<bool>
+    public class SubmitAnswerCommand : IRequest<QuestionSubmissionChallengeDto>
     {
         public Guid QuestionId { get; set; }
 
@@ -19,24 +22,25 @@ namespace FindExactSolution.Application.QuestionSubmissions.Command.SubmitAnswer
         public string Answer { get; set; }
     }
 
-    public class SubmitAnswerCommandHandler : IRequestHandler<SubmitAnswerCommand, bool>
+    public class SubmitAnswerCommandHandler : IRequestHandler<SubmitAnswerCommand, QuestionSubmissionChallengeDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMapper _mapper;
 
-        public SubmitAnswerCommandHandler(IApplicationDbContext context, ICurrentUserService currentUserService)
+        public SubmitAnswerCommandHandler(IApplicationDbContext context, ICurrentUserService currentUserService, IMapper mapper)
         {
             _context = context;
             _currentUserService = currentUserService;
+            _mapper = mapper;
         }
 
-        public async Task<bool> Handle(SubmitAnswerCommand request, CancellationToken cancellationToken)
+        public async Task<QuestionSubmissionChallengeDto> Handle(SubmitAnswerCommand request, CancellationToken cancellationToken)
         {
-            var team = await _context.Teams
-                            .FirstOrDefaultAsync(t=>t.EventId == request.EventId 
-                            && t.Users.Any(u=>u.Id == _currentUserService.UserId), cancellationToken);
-
-            if(team == null)
+            var team = await _context.Teams.Include(t => t.Users)
+                                            .FirstOrDefaultAsync(t => t.EventId == request.EventId
+                                                                && t.Users.Any(u => u.Id == _currentUserService.UserId), cancellationToken);
+            if (team == null)
             {
                 throw new NotFoundException(nameof(Question), request.QuestionId);
             }
@@ -45,24 +49,33 @@ namespace FindExactSolution.Application.QuestionSubmissions.Command.SubmitAnswer
 
             var isCorrect = question.Answer == request.Answer;
 
-            var submission = await _context.QuestionSubmissions
-                                   .FirstOrDefaultAsync(qs => qs.QuestionId == request.QuestionId
-                                   && qs.TeamId == qs.TeamId, cancellationToken);
-            
-            if(submission == null)
+            var submissions = await _context.QuestionSubmissions.Where(qs => qs.QuestionId == request.QuestionId).ToListAsync(cancellationToken);
+
+            var calculatedPoints = isCorrect ? CalculatePoints(submissions, question.Point) : 0;
+
+            var submission = submissions.FirstOrDefault(qs => qs.TeamId == team.Id);
+
+            if (submission == null)
             {
-                submission = QuestionSubmission.Create(request.QuestionId, team.Id, isCorrect);
+                submission = QuestionSubmission.Create(request.QuestionId, team.Id, isCorrect, request.Answer, calculatedPoints);
 
                 await _context.QuestionSubmissions.AddAsync(submission, cancellationToken);
             }
             else
             {
-                submission.Update(isCorrect); 
+                if (submission.IsCorrect) return _mapper.Map<QuestionSubmissionChallengeDto>(submission);
+
+                submission.Update(isCorrect, request.Answer, calculatedPoints);
             }
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return isCorrect;
+            return _mapper.Map<QuestionSubmissionChallengeDto>(submission);
+        }
+
+        private static int CalculatePoints(List<QuestionSubmission> submissions, int point)
+        {
+            return point + Math.Max(2 - submissions.Count(s => s.IsCorrect), 0);
         }
     }
 }

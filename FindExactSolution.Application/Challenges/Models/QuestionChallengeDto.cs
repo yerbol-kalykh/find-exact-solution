@@ -4,7 +4,7 @@ using System;
 
 namespace FindExactSolution.Application.Challenges.Models
 {
-    public class QuestionChallengeDto : IMapFrom<Question>
+    public class QuestionChallengeDto
     {
         public Guid Id { get; set; }
 
@@ -13,5 +13,7 @@ namespace FindExactSolution.Application.Challenges.Models
         public string Description { get; set; }
         public string Input { get; set; }
         public int Point { get; set; }
+
+        public QuestionSubmissionChallengeDto QuestionSubmission { get; set; } = new QuestionSubmissionChallengeDto();
     }
 }

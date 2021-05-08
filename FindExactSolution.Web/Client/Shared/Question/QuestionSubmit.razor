@@ -13,11 +13,17 @@
         </div>
         <div class="form-group mx-sm-3 mb-2">
             <label for="inputPassword2" class="sr-only">Answer</label>
-            <InputText class="form-control form-control-sm" id="answer" @bind-Value="@SubmitAnswerResource.Answer"></InputText>
+            <InputText class="form-control form-control-sm" Readonly="@QuestionChallengeResource.IsSolved" id="answer" @bind-Value="@SubmitAnswerResource.Answer"></InputText>
         </div>
-        
-        <button type="submit" class="btn btn-info mb-2 btn-sm">Submit</button>
 
-        <div class="alert @StatusClass mx-sm-3 mb-2 alert-submit-message">@Message</div>
+        @if (QuestionChallengeResource.IsSolved)
+        {
+            <div class="alert alert-success mx-sm-3 mb-2 alert-submit-message">You have solved this question</div>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-info mb-2 btn-sm">Submit</button>
+            <div class="alert @StatusClass mx-sm-3 mb-2 alert-submit-message">@Message</div>
+        }
     </EditForm>
 </div>

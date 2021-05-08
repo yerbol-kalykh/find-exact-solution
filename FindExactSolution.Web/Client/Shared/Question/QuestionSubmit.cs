@@ -1,4 +1,5 @@
-﻿using FindExactSolution.Web.Client.Common.Interfaces;
+﻿using AutoMapper;
+using FindExactSolution.Web.Client.Common.Interfaces;
 using FindExactSolution.Web.Client.Common.Resources.Questions;
 using FindExactSolution.Web.Client.Common.Resources.QuestionSubmissions;
 using Microsoft.AspNetCore.Components;
@@ -10,6 +11,9 @@ namespace FindExactSolution.Web.Client.Shared.Question
 {
     public partial class QuestionSubmit
     {
+        protected string Message = string.Empty;
+        protected string StatusClass = string.Empty;
+
         [Parameter]
         public QuestionChallengeResource QuestionChallengeResource { get; set; }
 
@@ -24,29 +28,31 @@ namespace FindExactSolution.Web.Client.Shared.Question
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
 
-        //used to store state of screen
-        protected string Message = string.Empty;
-        protected string StatusClass = string.Empty;
+        [Inject]
+        public IMapper Mapper { get; set; }
 
         protected override void OnInitialized()
         {
             SubmitAnswerResource.EventId = EventId;
-            SubmitAnswerResource.QuestionId = QuestionChallengeResource.Id;
+            Mapper.Map(QuestionChallengeResource, SubmitAnswerResource);
         }
 
         protected async Task HandleValidSubmit()
         {
-            var isCorrect = await QuestionSubmissionService.SubmitAnswerToQuestionAsync(SubmitAnswerResource);
+            QuestionChallengeResource.QuestionSubmission = await QuestionSubmissionService.SubmitAnswerToQuestionAsync(SubmitAnswerResource);
 
-            if (isCorrect)
+            if (QuestionChallengeResource.QuestionSubmission != null)
             {
-                StatusClass = "alert-success";
-                Message = "That is the correct answer.";
-            }
-            else
-            {
-                StatusClass = "alert-danger";
-                Message = "That is incorrect answer.";
+                if (QuestionChallengeResource.IsSolved)
+                {
+                    StatusClass = "alert-success";
+                    Message = "That is the correct answer.";
+                }
+                else
+                {
+                    StatusClass = "alert-danger";
+                    Message = "That is incorrect answer.";
+                }
             }
         }
 

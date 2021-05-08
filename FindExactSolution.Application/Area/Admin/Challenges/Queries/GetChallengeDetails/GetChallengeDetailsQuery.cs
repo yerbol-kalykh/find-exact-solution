@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.Area.Admin.Challenges.Queries.GetChallengeDetails
 {
-    public class GetChallengeDetailsQuery : IRequest<ChallengeDetailsDto>
+    public class GetChallengeDetailsQuery : IRequest<AdminChallengeDetailsDto>
     {
         public Guid EventId { get; set; }
 
         public Guid Id { get; set; }
     }
 
-    public class GetChallengeDetailsQueryHandler : IRequestHandler<GetChallengeDetailsQuery, ChallengeDetailsDto>
+    public class GetChallengeDetailsQueryHandler : IRequestHandler<GetChallengeDetailsQuery, AdminChallengeDetailsDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace FindExactSolution.Application.Area.Admin.Challenges.Queries.GetChallen
             _mapper = mapper;
         }
 
-        public async Task<ChallengeDetailsDto> Handle(GetChallengeDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<AdminChallengeDetailsDto> Handle(GetChallengeDetailsQuery request, CancellationToken cancellationToken)
         {
             var challenge = await _context.Challenges.Include(q=>q.Questions).Include(q=>q.Event).FirstOrDefaultAsync(q=>q.Id == request.Id, cancellationToken);
 
@@ -38,7 +38,7 @@ namespace FindExactSolution.Application.Area.Admin.Challenges.Queries.GetChallen
                 throw new NotFoundException(nameof(Challenge), request.Id);
             }
 
-            return _mapper.Map<ChallengeDetailsDto>(challenge);
+            return _mapper.Map<AdminChallengeDetailsDto>(challenge);
         }
     }
 }

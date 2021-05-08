@@ -4,7 +4,7 @@ using System;
 
 namespace FindExactSolution.Application.Area.Admin.Challenges.Models
 {
-    public class QuestionChallengeDto : IMapFrom<Question>
+    public class AdminQuestionChallengeDto : IMapFrom<Question>
     {
         public Guid Id { get; set; }
 

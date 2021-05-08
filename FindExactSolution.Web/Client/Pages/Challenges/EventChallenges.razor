@@ -1,13 +1,16 @@
 ﻿@page "/events/{eventId:guid}/challenges"
 
-@if (_challenges == null)
+<div @ref="TimeDiv"></div>
+
+
+@if (_challengesResult == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
     <ul class="nav nav-tabs">
-        @foreach (var challenge in _challenges)
+        @foreach (var challenge in _challengesResult.Challenges)
         {
             <li class="nav-item">
                 <a class="nav-link @(challenge.Id == _currentChallenge.Id? "active" : "")" aria-current="page" @onclick="() => ChangeChallenge(challenge.Id)" href="#" @onclick:preventDefault>Challenge @challenge.Order</a>
@@ -15,7 +18,7 @@ else
         }
     </ul>
 
-    <ChallengeView SelectedChallenge="@_currentChallenge" EventId="@EventId"/>
+    <ChallengeView SelectedChallenge="@_currentChallenge" EventId="@EventId" />
 
-    <br/>
+    <br />
 }

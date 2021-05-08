@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FindExactSolution.Web.Client.Common.Resources.QuestionSubmissions;
+using System;
 
 namespace FindExactSolution.Web.Client.Common.Resources.Questions
 {
@@ -12,8 +13,15 @@ namespace FindExactSolution.Web.Client.Common.Resources.Questions
 
         public string Input { get; set; }
 
-        public string Answer { get; set; }
-
         public int Point { get; set; }
+
+        public bool IsSolved { 
+            get
+            {
+                return QuestionSubmission != null && QuestionSubmission.IsCorrect;
+            } 
+        }
+
+        public QuestionSubmissionChallengeResource QuestionSubmission { get; set; }
     }
 }

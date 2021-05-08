@@ -1,6 +1,7 @@
 ﻿using FindExactSolution.Web.Client.Common.Resources.Questions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FindExactSolution.Web.Client.Common.Resources.Challenges
 {
@@ -15,6 +16,14 @@ namespace FindExactSolution.Web.Client.Common.Resources.Challenges
         public string Body { get; set; }
 
         public int Point { get; set; }
+
+        public bool IsSolved
+        {
+            get
+            {
+                return Questions.All(q => q.IsSolved);
+            }
+        }
 
         public IEnumerable<QuestionChallengeResource> Questions { get; set; } = new List<QuestionChallengeResource>();
     }

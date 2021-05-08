@@ -11,6 +11,12 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
             builder.Property(x => x.IsCorrect).IsRequired();
 
             builder.Property(x => x.LastSubmittedDateTime).IsRequired();
+
+            builder.Property(x => x.TotalAttempts).IsRequired();
+
+            builder.Property(x => x.TeamAnswer).IsRequired();
+
+            builder.Property(x => x.EarnedPoints).IsRequired();
         }
     }
 }

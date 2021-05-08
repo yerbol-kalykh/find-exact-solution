@@ -1,9 +1,9 @@
 ﻿using FindExactSolution.Web.Client.Common.Interfaces;
 using FindExactSolution.Web.Client.Common.Resources.QuestionSubmissions;
+using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Services
@@ -18,18 +18,18 @@ namespace FindExactSolution.Web.Client.Services
             _httpClient = httpClient;
         }
 
-        public async Task<bool> SubmitAnswerToQuestionAsync(SubmitAnswerResource resource)
+        public async Task<QuestionSubmissionChallengeResource> SubmitAnswerToQuestionAsync(SubmitAnswerResource resource)
         {
-            var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
+            var resourceJson = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(string.Format(BaseQuestionsApiUrl, resource.EventId, resource.QuestionId), resourceJson);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                return await JsonSerializer.DeserializeAsync<bool>(await response.Content.ReadAsStreamAsync());
+                return JsonConvert.DeserializeObject<QuestionSubmissionChallengeResource>(await response.Content.ReadAsStringAsync());
             }
 
-            return false;
+            return null;
         }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.JSInterop;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,20 +17,36 @@ namespace FindExactSolution.Web.Client.Pages.Challenges
         [Inject]
         public IChallengeService ChallengeService { get; set; }
 
-        private IEnumerable<ChallengeResource> _challenges;
+        private ChallengesResultResource _challengesResult;
 
         private ChallengeResource _currentChallenge;
 
+        public ElementReference TimeDiv { get; set; }
+
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                
+            }
+        }
 
         protected override async Task OnInitializedAsync()
         {
             try
             {
-                _challenges = await ChallengeService.GetAllChallengesAsync(EventId);
+                _challengesResult = await ChallengeService.GetAllChallengesAsync(EventId);
 
-                _currentChallenge = _challenges.FirstOrDefault();
+                if(_challengesResult != null)
+                {
+                    await JSRuntime.InvokeVoidAsync("ClockFunctions.stopTime");
+                    //await JSRuntime.InvokeVoidAsync("ClockFunctions.startTime", TimeDiv, _challengesResult.Event.EndDateTime);
+                }
+
+                _currentChallenge = _challengesResult.Challenges.FirstOrDefault();
             }
             catch (AccessTokenNotAvailableException exception)
             {
@@ -41,7 +56,12 @@ namespace FindExactSolution.Web.Client.Pages.Challenges
 
         private void ChangeChallenge(Guid id)
         {
-            _currentChallenge = _challenges.FirstOrDefault(q=>q.Id == id);
+            _currentChallenge = _challengesResult.Challenges.FirstOrDefault(q => q.Id == id);
+        }
+
+        public void Dispose()
+        {
+            JSRuntime.InvokeVoidAsync("stopTime");
         }
     }
 }
