@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Web.Client.Pages.Events
 {
-    public partial class EventsOverview
+    public partial class Events
     {
         [Inject]
         public IEventService EventService { get; set; }
