@@ -78,7 +78,7 @@ else
 
     <button class="btn btn-success" @onclick="GenerateTeamAsync">Generate</button>
 
-    @if (_eventDetail.Teams.Count() == 0)
+    @if (_eventDetail.Teams == null || _eventDetail.Teams.Count() == 0)
     {
         <p style="margin-top:5px">No results found</p>
     }
@@ -88,17 +88,57 @@ else
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Name</th>
+                        <th>Total users</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var team in _eventDetail.Teams)
                     {
                         <tr>
-                            <td>@team.Id</td>
                             <td>@team.Name</td>
                         </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <hr />
+
+    <h4>Leaderboard</h4>
+
+    <button class="btn btn-success" @onclick="GenerateLeaderboardAsync">Generate</button>
+
+    @if (_eventDetail.Results == null || _eventDetail.Results.Count() == 0)
+    {
+        <p style="margin-top:5px">No results found</p>
+    }
+    else
+    {
+        <div class="mt-4">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Team</th>
+                        <th>Total challenges</th>
+                        <th>Challenges solved</th>
+                        <th>Total questions</th>
+                        <th>Questions solved</th>
+                        <th>Total points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in _eventDetail.Results)
+                    {
+                    <tr>
+                        <td>@result.TeamName</td>
+                        <td>@result.TotalChallenges</td>
+                        <td>@result.SolvedChallenges</td>
+                        <td>@result.TotalQuestions</td>
+                        <td>@result.SolvedQuestions</td>
+                        <td>@result.TotalPoints</td>
+                    </tr>
                     }
                 </tbody>
             </table>

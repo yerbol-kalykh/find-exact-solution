@@ -2,13 +2,11 @@
     var clock;
 
     window.ClockFunctions = {
-        startTime(element, endDate) {
-            console.log(element);
-            // Update the count down every 1 second
+        startTime(elementId, endDate) {
+
             var x = setInterval(function () {
 
                 var countDownDate = new Date(endDate).getTime();
-                // Get today's date and time
                 var now = new Date().getTime();
 
                 // Find the distance between now and the count down date
@@ -20,25 +18,23 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Display the result in the element
-
+                
                 let timeString;
 
-                if (days > 0) timeString = `${days}d `;
+                timeString = days > 0 ? `${days}d `: "";
 
                 timeString = `${timeString}${hours}h ${minutes}m ${seconds}s`;
 
-                document.getElementById("TimeDiv").innerHTML = timeString;
+                var searchElement = document.getElementById(elementId);
+
+                searchElement.innerHTML = timeString;
 
                 // If the count down is finished, write some text
                 if (distance < 0) {
                     clearInterval(x);
-                    element.innerHTML = "Finished";
+                    searchElement.innerHTML = "Finished";
                 }
             }, 1000);
-            //let timeString = new Date().toLocaleTimeString('en-US', { hour: 'numeric', hour12: false, minute: 'numeric', second: 'numeric' });
-            //element.innerHTML = timeString;
-            //clock = setTimeout(startTime.bind(null, element), 1000);
         },
         stopTime() {
             clearTimeout(clock);

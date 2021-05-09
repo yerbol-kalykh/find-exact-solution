@@ -20,6 +20,9 @@ namespace FindExactSolution.Web.Client.Shared.Question
         [Parameter]
         public Guid EventId { get; set; }
 
+        [Parameter]
+        public bool IsOpen{ get; set; }
+
         [Inject]
         public IQuestionSubmissionService QuestionSubmissionService { get; set; }
 

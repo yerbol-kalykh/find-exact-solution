@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace FindExactSolution.Application.Area.Admin.Questions.Queries
 {
-    public class GetQuestionDetailsQuery : IRequest<QuestionDetailsDto>
+    public class GetQuestionDetailsQuery : IRequest<AdminQuestionDetailsDto>
     {
         public Guid ChallengeId { get; set; }
 
         public Guid Id { get; set; }
     }
 
-    public class GetQuestionDetailsQueryHandler : IRequestHandler<GetQuestionDetailsQuery, QuestionDetailsDto>
+    public class GetQuestionDetailsQueryHandler : IRequestHandler<GetQuestionDetailsQuery, AdminQuestionDetailsDto>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Queries
             _mapper = mapper;
         }
 
-        public async Task<QuestionDetailsDto> Handle(GetQuestionDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<AdminQuestionDetailsDto> Handle(GetQuestionDetailsQuery request, CancellationToken cancellationToken)
         {
             var question = await _context.Questions.Include(p => p.Challenge).FirstOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
 
@@ -38,7 +38,7 @@ namespace FindExactSolution.Application.Area.Admin.Questions.Queries
                 throw new NotFoundException(nameof(Question), request.Id);
             }
 
-            return _mapper.Map<QuestionDetailsDto>(question);
+            return _mapper.Map<AdminQuestionDetailsDto>(question);
         }
     }
 }

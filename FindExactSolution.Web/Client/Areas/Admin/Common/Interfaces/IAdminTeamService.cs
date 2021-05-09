@@ -5,6 +5,6 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces
 {
     public interface IAdminTeamService
     {
-        Task GenerateTeamsAsync(GenerateTeamResource resource);
+        Task GenerateTeamsAsync(AdminGenerateTeamResource resource);
     }
 }

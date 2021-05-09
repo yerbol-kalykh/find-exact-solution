@@ -80,7 +80,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsOpen")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDateTime")
@@ -186,6 +186,36 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Registrations");
+                });
+
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Result", b =>
+                {
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TeamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SolvedChallenges")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SolvedQuestions")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalChallenges")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalQuestions")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventId", "TeamId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Results");
                 });
 
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Team", b =>
@@ -595,6 +625,25 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("FindExactSolution.Domain.Entities.Result", b =>
+                {
+                    b.HasOne("FindExactSolution.Domain.Entities.Event", "Event")
+                        .WithMany("Results")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FindExactSolution.Domain.Entities.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("FindExactSolution.Domain.Entities.Team", b =>
                 {
                     b.HasOne("FindExactSolution.Domain.Entities.Event", "Event")
@@ -667,6 +716,8 @@ namespace FindExactSolution.Infrastructure.Persistence.Migrations
                     b.Navigation("Challenges");
 
                     b.Navigation("Registrations");
+
+                    b.Navigation("Results");
 
                     b.Navigation("Teams");
                 });

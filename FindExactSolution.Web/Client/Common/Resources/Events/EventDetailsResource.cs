@@ -1,5 +1,7 @@
-﻿using FindExactSolution.Web.Client.Common.Resources.Teams;
+﻿using FindExactSolution.Web.Client.Common.Resources.Results;
+using FindExactSolution.Web.Client.Common.Resources.Teams;
 using System;
+using System.Collections.Generic;
 
 namespace FindExactSolution.Web.Client.Common.Resources.Events
 {
@@ -15,8 +17,11 @@ namespace FindExactSolution.Web.Client.Common.Resources.Events
 
         public DateTime EndDateTime { get; set; }
 
+        public bool IsOpen { get; set; }
         public bool IsCurrentUserRegistered { get; set; }
 
         public TeamResource Team { get; set; }
+
+        public IEnumerable<ResultEventResource> Results { get; set; } = new List<ResultEventResource>();
     }
 }

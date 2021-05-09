@@ -17,12 +17,14 @@ namespace FindExactSolution.Domain.Entities
 
         public DateTime? DeletedDate { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsOpen { get; set; }
 
         public IList<Challenge> Challenges { get; set; } = new List<Challenge>();
 
         public IList<Team> Teams { get; set; } = new List<Team>();
 
         public IList<Registration> Registrations { get; set; } = new List<Registration>();
+
+        public IList<Result> Results { get; set; } = new List<Result>();
     }
 }

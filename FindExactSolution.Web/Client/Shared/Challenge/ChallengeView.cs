@@ -11,5 +11,8 @@ namespace FindExactSolution.Web.Client.Shared.Challenge
 
         [Parameter]
         public Guid EventId { get; set; }
+
+        [Parameter]
+        public bool IsOpen{ get; set; }
     }
 }

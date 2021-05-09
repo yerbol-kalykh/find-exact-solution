@@ -1,23 +1,28 @@
 ﻿@page "/events/{eventId:guid}/challenges"
 
-
-
 @if (_challengesResult == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <div class="card" style="width: 18rem;">
+    <div class="card mb-3" style="width: 35rem;">
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted" id="TimeDiv"></h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <h3 class="card-title">
+                @if (_challengesResult.Event.IsOpen)
+                {
+                    <span class="badge badge-warning mr-2">Live</span>
+                }
+                <a href="/events/@_challengesResult.Event.Id" class="card-link">@_challengesResult.Event.Title</a>
+            </h3>
+            <h5 class="card-subtitle mb-2 text-muted" id="timerDiv"></h5>
+
+            <p class="card-text">@_challengesResult.Event.Description</p>
         </div>
     </div>
 
+    <h3>Challenges</h3>
+    
     <ul class="nav nav-tabs">
         @foreach (var challenge in _challengesResult.Challenges)
         {
@@ -27,7 +32,7 @@ else
         }
     </ul>
 
-    <ChallengeView SelectedChallenge="@_currentChallenge" EventId="@EventId" />
+    <ChallengeView SelectedChallenge="@_currentChallenge" EventId="@EventId" IsOpen="@_challengesResult.Event.IsOpen"/>
 
     <br />
 }

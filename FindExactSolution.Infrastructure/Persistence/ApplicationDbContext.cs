@@ -17,6 +17,7 @@ namespace FindExactSolution.Infrastructure.Persistence
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<QuestionSubmission> QuestionSubmissions { get; set; }
+        public DbSet<Result> Results { get; set; }
 
         public ApplicationDbContext(
            DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)

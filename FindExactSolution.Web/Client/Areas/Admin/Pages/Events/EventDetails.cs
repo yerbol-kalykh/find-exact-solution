@@ -20,6 +20,9 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         public IAdminTeamService AdminTeamService { get; set; }
 
         [Inject]
+        public IAdminResultService AdminResultService { get; set; }
+
+        [Inject]
         public NavigationManager UriHelper { get; set; }
 
         private AdminEventDetailResource _eventDetail;
@@ -38,9 +41,14 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
 
         public async Task GenerateTeamAsync()
         {
-            var generateTeamResource = new GenerateTeamResource() { EventId = _eventDetail.Id };
+            var generateTeamResource = new AdminGenerateTeamResource() { EventId = Id };
 
             await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
+        }
+
+        public async Task GenerateLeaderboardAsync()
+        {
+            _eventDetail.Results = await AdminResultService.GenerateLeaderboardAsync(Id);
         }
 
         public void NavigateToCreateChallenge()

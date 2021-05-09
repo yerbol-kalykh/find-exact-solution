@@ -1,0 +1,30 @@
+﻿<div class="mt-4">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Rank #</th>
+                <th>Team</th>
+                <th>Total challenges</th>
+                <th>Challenges solved</th>
+                <th>Total questions</th>
+                <th>Questions solved</th>
+                <th>Total points</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var ranking = 0;}
+            @foreach (var result in Results)
+            {
+                <tr>
+                    <td>@(++ranking)</td>
+                    <td>@result.TeamName</td>
+                    <td>@result.TotalChallenges</td>
+                    <td>@result.SolvedChallenges</td>
+                    <td>@result.TotalQuestions</td>
+                    <td>@result.SolvedQuestions</td>
+                    <td>@result.TotalPoints</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

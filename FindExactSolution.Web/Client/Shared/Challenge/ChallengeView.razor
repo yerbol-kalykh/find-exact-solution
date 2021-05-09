@@ -6,7 +6,17 @@
 
     <div class="challenge-point">
         <h5>
-            <span class="badge badge-info">@SelectedChallenge.Point points</span>
+            <span class="badge badge-info mr-2">@SelectedChallenge.Point points</span>
+            
+            @if (SelectedChallenge.IsSolved)
+            {
+                <span class="badge badge-success">Solved</span>
+            }
+            else
+            {
+                <span class="badge badge-warning">Not solved</span>
+            }
+            
         </h5>
     </div>
 
@@ -26,6 +36,6 @@
             </p>
         </div>
             
-        <QuestionSubmit QuestionChallengeResource="@question" EventId="@EventId"></QuestionSubmit>
+        <QuestionSubmit QuestionChallengeResource="@question" EventId="@EventId" IsOpen="@IsOpen"></QuestionSubmit>
     }
 </div>

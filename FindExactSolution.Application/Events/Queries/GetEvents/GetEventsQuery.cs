@@ -32,8 +32,8 @@ namespace FindExactSolution.Application.Events.Queries.GetEvents
         public async Task<IEnumerable<EventDto>> Handle(GetEventsQuery request, CancellationToken cancellationToken)
         {
             return  await _context.Events
-                                  .Where(e => e.IsActive)
                                   .AsNoTracking()
+                                  .Where(e=>!e.DeletedDate.HasValue)
                                   .ProjectTo<EventDto>(_mapper.ConfigurationProvider)
                                   .ToListAsync(cancellationToken);
         }

@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 namespace FindExactSolution.Application.Area.Admin.Events.Queries.GetAllEvents
 {
     [Authorize]
-    public class GetAllEventsQuery : IRequest<IEnumerable<EventDto>>
+    public class GetAllEventsQuery : IRequest<IEnumerable<AdminEventDto>>
     {
         
     }
 
-    public class GetAllEventsQueryHandler : IRequestHandler<GetAllEventsQuery, IEnumerable<EventDto>>
+    public class GetAllEventsQueryHandler : IRequestHandler<GetAllEventsQuery, IEnumerable<AdminEventDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -28,11 +28,11 @@ namespace FindExactSolution.Application.Area.Admin.Events.Queries.GetAllEvents
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<EventDto>> Handle(GetAllEventsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AdminEventDto>> Handle(GetAllEventsQuery request, CancellationToken cancellationToken)
         {
             return await _context.Events
                                   .AsNoTracking()
-                                  .ProjectTo<EventDto>(_mapper.ConfigurationProvider)
+                                  .ProjectTo<AdminEventDto>(_mapper.ConfigurationProvider)
                                   .ToListAsync(cancellationToken);
         }
     }

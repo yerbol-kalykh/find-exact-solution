@@ -10,7 +10,7 @@ namespace FindExactSolution.Infrastructure.Persistence.Configurations
         {
             builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
 
-            builder.Property(x => x.IsActive).IsRequired();
+            builder.Property(x => x.IsOpen).IsRequired();
 
             builder.Property(t => t.Description)
                    .IsRequired()

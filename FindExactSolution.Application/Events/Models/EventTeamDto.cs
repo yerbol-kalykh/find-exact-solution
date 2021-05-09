@@ -11,6 +11,6 @@ namespace FindExactSolution.Application.Events.Models
 
         public string Name { get; set; }
 
-        public IList<EventUserDto> Users { get; set; } = new List<EventUserDto>();
+        public IEnumerable<UserEventDto> Users { get; set; } = new List<UserEventDto>();
     }
 }

@@ -22,14 +22,14 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
     {
         private readonly IApplicationDbContext _context;
 
-        public GenerateTeamsCommandHandler(IApplicationDbContext context, IIdentityService identityService)
+        public GenerateTeamsCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
         public async Task<Unit> Handle(GenerateTeamsCommand request, CancellationToken cancellationToken)
         {
-            await DeletePreviousCreatedTeamsAsync(request.EventId);
+            await DeletePreviousCreatedTeamsAsync(request.EventId, cancellationToken);
 
             var registrations = await _context.Registrations.Include(r => r.User).Where(r => r.EventId == request.EventId
                                           && r.Status == RegistrationStatus.Registered).Select(r => r.User).ToListAsync(cancellationToken);
@@ -52,9 +52,9 @@ namespace FindExactSolution.Application.Area.Admin.Teams.Commands.GenerateTeams
             return Unit.Value;
         }
 
-        public async Task DeletePreviousCreatedTeamsAsync(Guid eventId)
+        public async Task DeletePreviousCreatedTeamsAsync(Guid eventId, CancellationToken cancellationToken)
         {
-            var teams = await _context.Teams.Where(t => t.EventId == eventId).ToListAsync();
+            var teams = await _context.Teams.Where(t => t.EventId == eventId).ToListAsync(cancellationToken);
 
             _context.Teams.RemoveRange(teams);
 

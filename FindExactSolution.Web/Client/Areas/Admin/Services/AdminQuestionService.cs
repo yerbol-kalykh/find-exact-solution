@@ -1,5 +1,6 @@
 ﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Questions;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -27,13 +28,13 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
 
         public async Task<Guid> CreateQuestionAsync(AdminQuestionCreateResource resource)
         {
-            var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
+            var resourceJson = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync(string.Format(BaseQuestionsApiUrl, resource.ChallengeId), resourceJson);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.IsSuccessStatusCode)
             {
-                return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync());
+                return JsonConvert.DeserializeObject<Guid>(await response.Content.ReadAsStringAsync());
             }
 
             return Guid.Empty;
@@ -41,7 +42,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
 
         public async Task UpdateQuestionAsync(AdminQuestionEditResource resource)
         {
-            var resourceJson = new StringContent(JsonSerializer.Serialize(resource), Encoding.UTF8, "application/json");
+            var resourceJson = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, "application/json");
 
             await _httpClient.PutAsync($"{string.Format(BaseQuestionsApiUrl, resource.ChallengeId)}/{resource.Id}", resourceJson);
         }

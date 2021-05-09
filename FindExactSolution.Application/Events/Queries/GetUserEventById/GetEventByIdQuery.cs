@@ -33,7 +33,10 @@ namespace FindExactSolution.Application.Events.Queries.GetUserEventById
 
         public async Task<EventDetailsDto> Handle(GetUserEventByIdQuery request, CancellationToken cancellationToken)
         {
-            var eventEntity = await _context.Events.FirstOrDefaultAsync(e => e.Id == request.Id, cancellationToken);
+            var eventEntity = await _context.Events.AsNoTracking()
+                                                   .Include(e=>e.Results.OrderByDescending(r=>r.TotalPoints))
+                                                   .ThenInclude(e => e.Team)
+                                                   .FirstOrDefaultAsync(e => e.Id == request.Id, cancellationToken);
 
             var response = new EventDetailsDto();
 
@@ -43,7 +46,7 @@ namespace FindExactSolution.Application.Events.Queries.GetUserEventById
                                             && r.Status != RegistrationStatus.Cancelled,  cancellationToken);
 
             var team = await _context.Teams.Include(t => t.Users)
-                             .FirstOrDefaultAsync(t => t.Users.Any(u => u.Id == _userService.UserId), cancellationToken: cancellationToken);
+                                           .FirstOrDefaultAsync(t => t.Users.Any(u => u.Id == _userService.UserId), cancellationToken);
 
             response.Team = _mapper.Map<EventTeamDto>(team);
 

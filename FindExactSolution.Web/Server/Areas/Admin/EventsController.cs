@@ -13,13 +13,13 @@ namespace FindExactSolution.Web.Server.Areas.Admin
     public class EventsController : ApiControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetAllEvents()
+        public async Task<ActionResult<IEnumerable<AdminEventDto>>> GetAllEvents()
         {
             return Ok(await Mediator.Send(new GetAllEventsQuery()));
         }
 
         [HttpGet("{id:Guid}")]
-        public async Task<ActionResult<IEnumerable<EventDto>>> GetEventDetails([FromRoute] Guid id)
+        public async Task<ActionResult<IEnumerable<AdminEventDto>>> GetEventDetails([FromRoute] Guid id)
         {
             return Ok(await Mediator.Send(new GetEventDetailsQuery() { Id = id }));
         }

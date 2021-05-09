@@ -15,10 +15,10 @@ namespace FindExactSolution.Application.Registrations.Commands
         {
             _context = context;
 
-            RuleFor(v => v.EventId).MustAsync(EventExists).WithMessage("The specified event does not exists."); ;
+            RuleFor(v => v.EventId).MustAsync(EventExists).WithMessage("The specified event does not exists.");
         }
 
-        public async Task<bool> EventExists(CreateRegistrationCommand model, Guid eventId, CancellationToken cancellationToken)
+        public async Task<bool> EventExists(CreateRegistrationCommand command, Guid eventId, CancellationToken cancellationToken)
         {
             return await _context.Events.AnyAsync(e => e.Id == eventId, cancellationToken);
         }

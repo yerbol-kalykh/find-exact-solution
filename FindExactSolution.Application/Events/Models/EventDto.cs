@@ -15,5 +15,7 @@ namespace FindExactSolution.Application.Events.Models
         public DateTime StartDateTime { get; set; }
 
         public DateTime EndDateTime { get; set; }
+
+        public bool IsOpen { get; set; }
     }
 }

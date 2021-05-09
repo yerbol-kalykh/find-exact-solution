@@ -18,7 +18,9 @@ namespace FindExactSolution.Application.Common.Interfaces
         DbSet<Question> Questions { get; set; }
 
         DbSet<QuestionSubmission> QuestionSubmissions { get; set; }
- 
+
+        DbSet<Result> Results { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
