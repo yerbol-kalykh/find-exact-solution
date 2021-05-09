@@ -3,6 +3,7 @@
 
     window.ClockFunctions = {
         startTime(element, endDate) {
+            console.log(element);
             // Update the count down every 1 second
             var x = setInterval(function () {
 
@@ -27,7 +28,7 @@
 
                 timeString = `${timeString}${hours}h ${minutes}m ${seconds}s`;
 
-                element.innerHTML = timeString;
+                document.getElementById("TimeDiv").innerHTML = timeString;
 
                 // If the count down is finished, write some text
                 if (distance < 0) {

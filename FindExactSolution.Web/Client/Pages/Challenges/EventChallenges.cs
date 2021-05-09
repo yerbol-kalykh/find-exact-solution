@@ -21,18 +21,10 @@ namespace FindExactSolution.Web.Client.Pages.Challenges
 
         private ChallengeResource _currentChallenge;
 
-        public ElementReference TimeDiv { get; set; }
+        public ElementReference TimeDiv { get; set; } = new ElementReference();
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; }
-
-        protected override async Task OnAfterRenderAsync(bool firstRender)
-        {
-            if (firstRender)
-            {
-                
-            }
-        }
 
         protected override async Task OnInitializedAsync()
         {
@@ -42,8 +34,7 @@ namespace FindExactSolution.Web.Client.Pages.Challenges
 
                 if(_challengesResult != null)
                 {
-                    await JSRuntime.InvokeVoidAsync("ClockFunctions.stopTime");
-                    //await JSRuntime.InvokeVoidAsync("ClockFunctions.startTime", TimeDiv, _challengesResult.Event.EndDateTime);
+                    await JSRuntime.InvokeVoidAsync("ClockFunctions.startTime", TimeDiv, _challengesResult.Event.EndDateTime);
                 }
 
                 _currentChallenge = _challengesResult.Challenges.FirstOrDefault();

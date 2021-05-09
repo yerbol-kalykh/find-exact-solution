@@ -22,7 +22,7 @@ namespace FindExactSolution.Web.Server.Controllers
         {
             if (id == Guid.Empty) return BadRequest();
 
-            return Ok(await Mediator.Send(new GetUserEventByIdQuery() { Id = id}));
+            return Ok(await Mediator.Send(new GetUserEventByIdQuery() { Id = id }));
         }
     }
 }

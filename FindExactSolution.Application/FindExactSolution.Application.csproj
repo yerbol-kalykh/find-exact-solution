@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Leaderboard\Commands\" />
     <Folder Include="Registrations\Models\" />
   </ItemGroup>
 
