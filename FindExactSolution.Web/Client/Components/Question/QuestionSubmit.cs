@@ -7,7 +7,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Threading.Tasks;
 
-namespace FindExactSolution.Web.Client.Shared.Question
+namespace FindExactSolution.Web.Client.Components.Question
 {
     public partial class QuestionSubmit
     {

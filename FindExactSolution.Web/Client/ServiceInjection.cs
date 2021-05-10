@@ -28,6 +28,9 @@ namespace FindExactSolution.Web.Client
             services.AddHttpClient<IResultService, ResultService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                      .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
+            services.AddHttpClient<ITeamService, TeamService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
+                     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
             services.AddHttpClient<IAdminEventService, AdminEventService>(client => client.BaseAddress = new Uri(hostEnvironment.BaseAddress))
                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 

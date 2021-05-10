@@ -57,25 +57,26 @@ else
         }
         else
         {
-            <h4>@_event.Team.Name</h4>
+            <h4>Team name: @_event.Team.Name</h4>
+
+            <button @onclick="ShowEditTeamDialog" class="btn btn-info btn-sm mb-2">Edit name</button>
+
+
+            <EditTeamDialog Id="@_event.Team.Id" Name="@_event.Team.Name" @ref="EditTeamDialog" CloseEventCallback="EditTeamDialog_OnDialogClose"></EditTeamDialog>
 
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Username</th>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @code{int row = 0;}
-
                     @foreach (var member in _event.Team.Users)
                     {
                         <tr>
-                            <td>@(++row)</td>
                             <td>@member.UserName</td>
                             <td>@member.FirstName</td>
                             <td>@member.LastName</td>
@@ -98,3 +99,4 @@ else
         }
     }
 }
+

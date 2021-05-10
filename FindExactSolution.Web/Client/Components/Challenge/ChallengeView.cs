@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System;
 
-namespace FindExactSolution.Web.Client.Shared.Challenge
+namespace FindExactSolution.Web.Client.Components.Challenge
 {
     public partial class ChallengeView
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 
-namespace FindExactSolution.Web.Client.Shared.Leaderboard
+namespace FindExactSolution.Web.Client.Components.Leaderboard
 {
     public partial class Leaderboard
     {
