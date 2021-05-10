@@ -16,6 +16,6 @@ namespace FindExactSolution.Domain.Entities
 
         public IList<IUser> Users { get; set; } = new List<IUser>();
 
-        public IList<QuestionSubmission> QuestionSubmissions = new List<QuestionSubmission>();
+        public IList<QuestionSubmission> QuestionSubmissions { get; set; } = new List<QuestionSubmission>();
     }
 }

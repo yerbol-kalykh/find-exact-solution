@@ -37,18 +37,23 @@ namespace FindExactSolution.Application.QuestionSubmissions.Command.SubmitAnswer
 
         public async Task<QuestionSubmissionChallengeDto> Handle(SubmitAnswerCommand request, CancellationToken cancellationToken)
         {
-            var team = await _context.Teams.Include(t => t.Users)
-                                            .FirstOrDefaultAsync(t => t.EventId == request.EventId
-                                                                && t.Users.Any(u => u.Id == _currentUserService.UserId), cancellationToken);
+            var team = await _context.Teams.Include(t=>t.QuestionSubmissions)
+                                           .Include(t => t.Users)
+                                           .FirstOrDefaultAsync(t => t.EventId == request.EventId 
+                                           && t.Users.Any(u => u.Id == _currentUserService.UserId), cancellationToken);
+
             if (team == null)
             {
-                throw new NotFoundException(nameof(Question), request.QuestionId);
+                throw new NotFoundException("Team was not found for current user");
             }
 
-            var question = await _context.Questions.FirstOrDefaultAsync(q => q.Id == request.QuestionId, cancellationToken);
+            var question = await _context.Questions.Include(q=>q.Challenge)
+                                                        .ThenInclude(c=>c.Questions)
+                                                   .FirstOrDefaultAsync(q => q.Id == request.QuestionId, cancellationToken);
 
             var isCorrect = question.Answer == request.Answer;
 
+            // Create or update submission
             var submissions = await _context.QuestionSubmissions.Where(qs => qs.QuestionId == request.QuestionId).ToListAsync(cancellationToken);
 
             var calculatedPoints = isCorrect ? CalculatePoints(submissions, question.Point) : 0;
@@ -68,9 +73,25 @@ namespace FindExactSolution.Application.QuestionSubmissions.Command.SubmitAnswer
                 submission.Update(isCorrect, request.Answer, calculatedPoints);
             }
 
+            if (submission.IsCorrect)
+            {
+                await UpdateTeamResultAsync(request.EventId, team, submission, question);
+            }
+
             await _context.SaveChangesAsync(cancellationToken);
 
             return _mapper.Map<QuestionSubmissionChallengeDto>(submission);
+        }
+
+        private async Task UpdateTeamResultAsync(Guid eventId, Team team, QuestionSubmission submission, Question question)
+        {
+            var result = await _context.Results.FirstOrDefaultAsync(r => r.EventId == eventId && r.TeamId == team.Id);
+
+            result.TotalPoints += submission.EarnedPoints;
+
+            if (submission.IsCorrect) result.SolvedQuestions++;
+
+            if (team.QuestionSubmissions.Count(qs => qs.IsCorrect) == question.Challenge.Questions.Count) result.SolvedChallenges++;
         }
 
         private static int CalculatePoints(List<QuestionSubmission> submissions, int point)
