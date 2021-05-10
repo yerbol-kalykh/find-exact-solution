@@ -7,9 +7,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace FindExactSolution.Web.Client.Pages.Challenges
 {
-    public partial class EventChallenges
+    public partial class EventChallenges : IDisposable
     {
         [Parameter]
         public Guid EventId { get; set; }
@@ -50,7 +51,7 @@ namespace FindExactSolution.Web.Client.Pages.Challenges
 
         public void Dispose()
         {
-            JSRuntime.InvokeVoidAsync("stopTime");
+            JSRuntime.InvokeVoidAsync("ClockFunctions.stopTime");
         }
     }
 }

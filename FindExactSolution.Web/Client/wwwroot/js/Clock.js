@@ -4,7 +4,7 @@
     window.ClockFunctions = {
         startTime(elementId, endDate) {
 
-            var x = setInterval(function () {
+            clock = setInterval(function () {
 
                 var countDownDate = new Date(endDate).getTime();
                 var now = new Date().getTime();
@@ -37,7 +37,7 @@
             }, 1000);
         },
         stopTime() {
-            clearTimeout(clock);
+            clearInterval(clock);
         }
     };
 })();
