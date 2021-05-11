@@ -37,11 +37,12 @@ namespace FindExactSolution.Web.Client.Components.Question
         protected override void OnInitialized()
         {
             SubmitAnswerResource.EventId = EventId;
-            Mapper.Map(QuestionChallengeResource, SubmitAnswerResource);
         }
 
         protected async Task HandleValidSubmit()
         {
+            SubmitAnswerResource.QuestionId = QuestionChallengeResource.Id;
+
             QuestionChallengeResource.QuestionSubmission = await QuestionSubmissionService.SubmitAnswerToQuestionAsync(SubmitAnswerResource);
 
             if (QuestionChallengeResource.QuestionSubmission != null)

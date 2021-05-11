@@ -9,15 +9,17 @@
 
     <EditForm class="form-inline" Model="@SubmitAnswerResource" OnValidSubmit="@HandleValidSubmit">
         <DataAnnotationsValidator />
+        @if (!QuestionChallengeResource.IsSolved)
+        {
+            <div class="form-group mb-2">
+                <label for="inputPassword2" class="col-form-label"><strong>Answer</strong></label>
+            </div>
 
-        <div class="form-group mb-2">
-            <label for="inputPassword2" class="col-form-label"><strong>Answer</strong></label>
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <label for="inputPassword2" class="sr-only">Answer</label>
-            <InputText class="form-control form-control-sm" Readonly="@(QuestionChallengeResource.IsSolved || !IsOpen)" id="answer" @bind-Value="@SubmitAnswerResource.Answer"></InputText>
-        </div>
-
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Answer</label>
+                <InputText class="form-control form-control-sm" Readonly="@(!IsOpen)" id="answer" @bind-Value="@SubmitAnswerResource.Answer"></InputText>
+            </div>
+        }
         @if (IsOpen)
         {
             @if (QuestionChallengeResource.IsSolved)

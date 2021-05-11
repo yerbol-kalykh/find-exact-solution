@@ -1,6 +1,5 @@
 ﻿using FindExactSolution.Web.Client.Common.Validations;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace FindExactSolution.Web.Client.Common.Resources.QuestionSubmissions
 {
@@ -9,7 +8,7 @@ namespace FindExactSolution.Web.Client.Common.Resources.QuestionSubmissions
         public Guid EventId { get; set; }
         public Guid QuestionId { get; set; }
 
-        [NotNullOrWhiteSpaceValidator(ErrorMessage = "HELLO")]
+        [NotNullOrWhiteSpaceValidator]
         public string Answer { get; set; }
     }
 }

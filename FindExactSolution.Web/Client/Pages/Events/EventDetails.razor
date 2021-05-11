@@ -18,11 +18,10 @@ else
                     - @_event.EndDateTime.ConvertToDefaultTimeFormat()
                 </span>
 
-                @if (DateTime.Now >= _event.StartDateTime)
+                @if (_event.IsOpen)
                 {
-                    //<small><a href="/events/@_event.Id/challenges" class="card-link">Go to event</a></small>
+                    <small><a href="/events/@_event.Id/challenges" class="card-link">Go to challenges</a></small>
                 }
-                <small><a href="/events/@_event.Id/challenges" class="card-link">Go to event</a></small>
             </h5>
 
             <p class="card-text font-italic pt-2">@_event.Description</p>
