@@ -43,7 +43,7 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Pages.Events
         {
             var generateTeamResource = new AdminGenerateTeamResource() { EventId = Id };
 
-            await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
+            _eventDetail.Teams = await AdminTeamService.GenerateTeamsAsync(generateTeamResource);
         }
 
         public async Task GenerateLeaderboardAsync()

@@ -1,4 +1,4 @@
-﻿@page "/yerbol/admin/events/{id:guid}"
+﻿@page "/admin/events/{id:guid}"
 
 @if (_eventDetail == null)
 {
@@ -89,15 +89,16 @@ else
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Total users</th>
+                        <th>Total members</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var team in _eventDetail.Teams)
                     {
-                        <tr>
-                            <td>@team.Name</td>
-                        </tr>
+                    <tr>
+                        <td>@team.Name</td>
+                        <td>@team.TotalMembers</td>
+                    </tr>
                     }
                 </tbody>
             </table>

@@ -1,6 +1,8 @@
 ﻿using FindExactSolution.Web.Client.Areas.Admin.Common.Interfaces;
+using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Results;
 using FindExactSolution.Web.Client.Areas.Admin.Common.Resources.Teams;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,18 @@ namespace FindExactSolution.Web.Client.Areas.Admin.Services
             _httpClient = httpClient;
         }
 
-        public async Task GenerateTeamsAsync(AdminGenerateTeamResource resource)
+        public async Task<IEnumerable<AdminTeamEventResource>> GenerateTeamsAsync(AdminGenerateTeamResource resource)
         {
             var resourceJson = new StringContent(JsonConvert.SerializeObject(resource), Encoding.UTF8, "application/json");
 
-            await _httpClient.PostAsync($"{BaseTeamsApiUrl}/{resource.EventId}", resourceJson);
+            var response = await _httpClient.PostAsync($"{BaseTeamsApiUrl}/{resource.EventId}", resourceJson);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<IEnumerable<AdminTeamEventResource>>(await response.Content.ReadAsStringAsync());
+            }
+
+            return null;
         }
     }
 }

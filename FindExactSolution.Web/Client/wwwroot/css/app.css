@@ -75,3 +75,7 @@ pre {
     line-height: 33px;
     padding: 0px 15px;
 }
+
+.nav-dropdown-item {
+    margin-left: 0px;
+}
